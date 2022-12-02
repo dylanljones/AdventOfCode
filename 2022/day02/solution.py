@@ -8,10 +8,6 @@ from aoc import Puzzle
 
 
 class Solution(Puzzle):
-
-    test_answer_1 = 15
-    test_answer_2 = 12
-
     def __init__(self):
         super().__init__(2022, 2)
 
