@@ -132,6 +132,10 @@ class User:
 
 
 class Puzzle:
+
+    test_answer_1 = None
+    test_answer_2 = None
+
     def __init__(self, year, day, user=None, root=""):
         if not user:
             user = User()
@@ -195,8 +199,11 @@ class Puzzle:
         self.soup = content
 
     def get_text(self, part):
-        article = self.soup.find_all("article")[part - 1]
-        return "".join(child.text for child in list(article)[1:])
+        try:
+            article = self.soup.find_all("article")[part - 1]
+            return "".join(child.text for child in list(article)[1:])
+        except IndexError:
+            return None
 
     def get_answer(self, part):
         element = self.soup.find_all("p", recursive=False)[part - 1]
@@ -263,6 +270,8 @@ class Puzzle:
         test_answer = self.solution_1(test_data)
         if test_answer is not None:
             print(f"Your test answer was     {test_answer}")
+            if self.test_answer_1 is not None:
+                assert test_answer == self.test_answer_1, "Test answer is not correct!"
         else:
             print("No solution implemented")
 
@@ -286,6 +295,8 @@ class Puzzle:
         test_answer = self.solution_2(test_data)
         if test_answer is not None:
             print(f"Your test answer was     {test_answer}")
+            if self.test_answer_2 is not None:
+                assert test_answer == self.test_answer_2, "Test answer is not correct!"
         else:
             print("No solution implemented")
 
