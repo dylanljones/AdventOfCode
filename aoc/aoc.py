@@ -27,6 +27,12 @@ class PuzzleNotAvailable(Exception):
     pass
 
 
+class TestAnswerError(Exception):
+    def __init__(self, actual, expected):
+        msg = f"Your test answer '{actual}' is incorrect, expected '{expected}'."
+        super().__init__(msg)
+
+
 def load_token():
     file = "token.txt"
     if not os.path.exists(file):
@@ -262,13 +268,13 @@ class Puzzle:
     def __repr__(self):
         return f"<{self.__class__.__name__}(year: {self.year}, day: {self.day})>"
 
-    def solution_1(self, data):
+    def solution_1(self, data: str):
         return None
 
-    def solution_2(self, data):
+    def solution_2(self, data: str):
         return None
 
-    def run(self):
+    def run(self, test_only=False, text=True):
         print(f"DAY {self.day:02}")
         print("-------")
 
@@ -282,21 +288,24 @@ class Puzzle:
             print(f"Your test answer was     {test_answer}")
             test_answer_1 = self.get_test_answer(1)
             if test_answer_1 is not None:
-                assert test_answer == test_answer_1, "Test answer is not correct!"
+                if not test_answer == test_answer_1:
+                    raise TestAnswerError(test_answer, test_answer_1)
         else:
             print("No solution implemented")
 
         answer_1 = self.answer_1
         if not answer_1:
-            print(self.text_1)
-            print()
-            answer = self.solution_1(data)
-            if answer is not None:
-                msg = self.submit(1, answer)
-                if "That's not the right answer" in msg:
-                    raise ValueError(msg)
-                print(msg)
-                self.load_info(reload=True)
+            if text:
+                print(self.text_1)
+                print()
+            if not test_only:
+                answer = self.solution_1(data)
+                if answer is not None:
+                    msg = self.submit(1, answer)
+                    if "That's not the right answer" in msg:
+                        raise ValueError(msg)
+                    print(msg)
+                    self.load_info(reload=True)
         else:
             print(f"Your puzzle answer was   {answer_1}")
 
@@ -308,20 +317,23 @@ class Puzzle:
             print(f"Your test answer was     {test_answer}")
             test_answer_2 = self.get_test_answer(2)
             if test_answer_2 is not None:
-                assert test_answer == test_answer_2, "Test answer is not correct!"
+                if not test_answer == test_answer_2:
+                    raise TestAnswerError(test_answer, test_answer_2)
         else:
             print("No solution implemented")
 
         answer_2 = self.answer_2
         if not answer_2:
-            print(self.text_2)
-            print()
-            answer = self.solution_2(data)
-            if answer is not None:
-                msg = self.submit(2, answer)
-                if "That's not the right answer" in msg:
-                    raise ValueError(msg)
-                print(msg)
-                self.load_info(reload=True)
+            if text:
+                print(self.text_2)
+                print()
+            if not test_only:
+                answer = self.solution_2(data)
+                if answer is not None:
+                    msg = self.submit(2, answer)
+                    if "That's not the right answer" in msg:
+                        raise ValueError(msg)
+                    print(msg)
+                    self.load_info(reload=True)
         else:
             print(f"Your puzzle answer was   {answer_2}")
