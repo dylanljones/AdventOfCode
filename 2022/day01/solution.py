@@ -4,7 +4,7 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
-from aoc import Puzzle
+from aoc.puzzle import Puzzle
 
 
 class Solution(Puzzle):
