@@ -6,4 +6,5 @@
 
 """Advent of Code helper package"""
 
-from .aoc import User, Puzzle
+from .client import Client
+from .puzzle import Puzzle
