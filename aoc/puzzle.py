@@ -178,6 +178,8 @@ class Puzzle:
                     msg = self.submit(2, answer)
                     if "That's not the right answer" in msg:
                         raise ValueError(msg)
+
+                    msg = msg.split("You can ")[0]
                     print(msg)
                     self.load_info(reload=True)
         else:

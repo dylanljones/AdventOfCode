@@ -84,8 +84,10 @@ def get_test_answer(article, code_idx=-1):
         text = block.text
         if "=" in text:
             text = text.split("=", maxsplit=1)[-1]
-
-        answer = int(text)
+        try:
+            answer = int(text)
+        except ValueError:
+            answer = text
     except TypeError:
         answer = None
     return answer
