@@ -67,20 +67,20 @@ def get_text(article):
         return None
 
 
-def get_test_input(article):
+def get_test_input(article, pre_idx=0):
     """Extract the test input"""
     try:
-        block = article.find_all(["pre"])[0]
+        block = article.find_all(["pre"])[pre_idx]
         data = block.text
     except TypeError:
         data = None
     return data
 
 
-def get_test_answer(article):
+def get_test_answer(article, code_idx=-1):
     """Extract the test answer"""
     try:
-        block = article.find_all("code")[-1]
+        block = article.find_all("code")[code_idx]
         text = block.text
         if "=" in text:
             text = text.split("=", maxsplit=1)[-1]
@@ -114,6 +114,10 @@ class Client:
     @property
     def token_sanitized(self) -> str:
         return f"...{self.token[-4:]}"
+
+    @staticmethod
+    def get_puzzle_url(year, day):
+        return URL.format(year=year, day=day)
 
     def get_user_stats(self, year: int = None) -> dict:
         if year is None:
@@ -156,7 +160,9 @@ class Client:
                 results[year] = stats
         return results
 
-    def get_puzzle(self, year, day):
+    def get_puzzle(
+        self, year, day, test_input_idx=0, test_answer_idx_1=-1, test_answer_idx_2=-1
+    ):
         url = URL.format(year=year, day=day)
         res = self.session.get(url)
         soup = BeautifulSoup(res.text, "html.parser")
@@ -166,9 +172,9 @@ class Client:
 
         article = soup.find_all("article")[0]
         title = article.h2.text.replace("-", "").strip()
-        test_input = get_test_input(article)
+        test_input = get_test_input(article, test_input_idx)
         text1 = get_text(article)
-        test_answer1 = get_test_answer(article)
+        test_answer1 = get_test_answer(article, test_answer_idx_1)
         # print(soup)
         p = soup.main.find_all("p", recursive=False)[0]
         answer1 = get_answer(p)
@@ -176,7 +182,7 @@ class Client:
         try:
             article = soup.find_all("article")[1]
             text2 = get_text(article)
-            test_answer2 = get_test_answer(article)
+            test_answer2 = get_test_answer(article, test_answer_idx_2)
             p = soup.main.find_all("p", recursive=False)[1]
             answer2 = get_answer(p)
         except IndexError:

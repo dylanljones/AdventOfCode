@@ -6,7 +6,7 @@
 
 import os
 import json
-from .client import Client, AOCException, URL
+from .client import Client, AOCException
 
 
 class TestAnswerError(AOCException):
@@ -16,6 +16,11 @@ class TestAnswerError(AOCException):
 
 
 class Puzzle:
+
+    test_input_idx = 0
+    test_answer_idx_1 = -1
+    test_answer_idx_2 = -1
+
     def __init__(self, year, day, root="", token="", headers=None):
         self.year = year
         self.day = day
@@ -27,7 +32,7 @@ class Puzzle:
 
     @property
     def url(self):
-        return URL.format(year=self.year, day=self.day)
+        return self.client.get_puzzle_url(self.year, self.day)
 
     @property
     def title(self):
@@ -77,7 +82,13 @@ class Puzzle:
             with open(file, "r") as fh:
                 info = dict(json.load(fh))
         else:
-            info = self.client.get_puzzle(self.year, self.day)
+            info = self.client.get_puzzle(
+                self.year,
+                self.day,
+                self.test_input_idx,
+                self.test_answer_idx_1,
+                self.test_answer_idx_2,
+            )
             if self.root and not os.path.exists(self.root):
                 os.makedirs(self.root)
             with open(file, "w") as fh:
