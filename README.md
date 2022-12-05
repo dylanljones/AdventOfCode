@@ -13,7 +13,7 @@ The solutions in Python all use the included Python interface
 This project includes a client for scraping data from [Advent of Code] and
 submitting answers.
 
-> Please do not spam the servers and cahce the data!
+> Please do not spam the servers and cache the data!
 > Caching is handled by the ``Puzzle`` object, not the client.
 
 Since the puzzle inputs differ by user, a session token has to be supplied.
