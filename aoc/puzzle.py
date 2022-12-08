@@ -147,10 +147,10 @@ class Puzzle:
             if not test_only:
                 answer = self.solution_1(data)
                 if answer is not None:
-                    msg = self.submit(1, answer)
-                    if "That's not the right answer" in msg:
+                    err, msg = self.submit(1, answer)
+                    if err:
                         raise ValueError(msg)
-                    print(msg)
+                    print(f"\033[32m{msg}\033[m")
                     self.load_info(reload=True)
         else:
             print(f"Your puzzle answer was   {answer_1}")
@@ -175,12 +175,10 @@ class Puzzle:
             if not test_only:
                 answer = self.solution_2(data)
                 if answer is not None:
-                    msg = self.submit(2, answer)
-                    if "That's not the right answer" in msg:
+                    err, msg = self.submit(2, answer)
+                    if err:
                         raise ValueError(msg)
-
-                    msg = msg.split("You can ")[0]
-                    print(msg)
+                    print(f"\033[32m{msg}\033[m")
                     self.load_info(reload=True)
         else:
             print(f"Your puzzle answer was   {answer_2}")

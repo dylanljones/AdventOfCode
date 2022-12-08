@@ -5,6 +5,7 @@
 # Copyright (c) 2022, Dylan Jones
 
 import os
+import re
 from datetime import datetime, timedelta
 import requests
 from bs4 import BeautifulSoup
@@ -13,6 +14,14 @@ URL = "https://adventofcode.com/{year}/day/{day}"
 STATS_URL = "https://adventofcode.com/{year}/leaderboard/self"
 
 USER_AGENT = "github.com/dylanljones/aoc2022"
+
+RE_RIGHT_ANSWER = re.compile("That's the right answer.")
+RE_WRONG_ANSWER = re.compile(
+    r"(That's not the right answer.).*If you're stuck,(.*?)You guessed (?P<val>.*)\."
+)
+RE_WAIT_ANSWER = re.compile(
+    r"(You gave an answer too recently.).*(You have (.*?) left to wait.)"
+)
 
 
 class AOCException(Exception):
@@ -100,6 +109,25 @@ def get_answer(p):
         return None
     text = text.replace(prefix, "")
     return text[:-1].strip()
+
+
+def parse_submit_msg(text):
+    match = RE_WRONG_ANSWER.search(text)
+    if match:
+        msg = f"{match.group(1).strip()} You guessed '{match.group(3)}'."
+        return 1, msg
+
+    match = RE_WAIT_ANSWER.search(text)
+    if match:
+        msg = f"{match.group(1).strip()} {match.group(2)}"
+        return 1, msg
+
+    match = RE_RIGHT_ANSWER.search(text)
+    if match:
+        return 0, match[0].strip()
+    else:
+        # unexpected output
+        raise ValueError(f"Could not parse response message: {text}")
 
 
 class Client:
@@ -213,8 +241,8 @@ class Client:
         data = {"level": part, "answer": str(answer)}
         res = self.session.post(url, data=data)
         soup = BeautifulSoup(res.text, "html.parser")
-        message = soup.article.text
-        return message
+        err, msg = parse_submit_msg(soup.article.text)
+        return err, msg
 
     def __repr__(self):
         return f"<{self.__class__.__name__}(token={self.token_sanitized})>"
