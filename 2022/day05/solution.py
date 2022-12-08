@@ -4,6 +4,7 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
+import os
 import re
 import aoc
 
@@ -41,7 +42,7 @@ def parse_puzzle(data: str):
 
 class Solution(aoc.Puzzle):
     def __init__(self):
-        super().__init__(2022, 5)
+        super().__init__(2022, 5, root=os.path.dirname(__file__))
 
     def solution_1(self, data: str):
         crates, moves = parse_puzzle(data)
