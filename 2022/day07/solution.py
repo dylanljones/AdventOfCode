@@ -1,6 +1,6 @@
 # coding: utf-8
 #
-# This code is part of aoc2022.
+# This code is part of aoc.
 #
 # Copyright (c) 2022, Dylan Jones
 
@@ -93,8 +93,7 @@ class Solution(aoc.Puzzle):
 
 def main():
     puzzle = Solution()
-    # puzzle.load_info()
-    puzzle.run(test_only=False, text=False)
+    puzzle.run()
 
 
 if __name__ == "__main__":
