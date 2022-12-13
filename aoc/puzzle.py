@@ -130,32 +130,35 @@ class Puzzle:
         data = self.get_input()
 
         print("[Part 1]")
+        print()
         test_answer = self.solution_1(test_data)
         if test_answer is not None:
             print(f"Your test answer was     {test_answer}")
             if self.test_answer_1 is not None:
                 if not test_answer == self.test_answer_1:
                     raise TestAnswerError(test_answer, self.test_answer_1)
+
+            answer_1 = self.answer_1
+            if not answer_1:
+                if text:
+                    print(self.text_1)
+                    print()
+                if not test_only:
+                    answer = self.solution_1(data)
+                    if answer is not None:
+                        err, msg = self.submit(1, answer)
+                        if err:
+                            raise ValueError(msg)
+                        print(f"\033[32m{msg}\033[m")
+                        self.load_info(reload=True)
+            else:
+                print(f"Your puzzle answer was   {answer_1}")
         else:
             print("No solution implemented")
-
-        answer_1 = self.answer_1
-        if not answer_1:
-            if text:
-                print(self.text_1)
-                print()
-            if not test_only:
-                answer = self.solution_1(data)
-                if answer is not None:
-                    err, msg = self.submit(1, answer)
-                    if err:
-                        raise ValueError(msg)
-                    print(f"\033[32m{msg}\033[m")
-                    self.load_info(reload=True)
-        else:
-            print(f"Your puzzle answer was   {answer_1}")
+        print()
 
         print("[Part 2]")
+        print()
         if not self.text_2:
             return
         test_answer = self.solution_2(test_data)
@@ -164,21 +167,21 @@ class Puzzle:
             if self.test_answer_2 is not None:
                 if not test_answer == self.test_answer_2:
                     raise TestAnswerError(test_answer, self.test_answer_2)
+
+            answer_2 = self.answer_2
+            if not answer_2:
+                if text:
+                    print(self.text_2)
+                    print()
+                if not test_only:
+                    answer = self.solution_2(data)
+                    if answer is not None:
+                        err, msg = self.submit(2, answer)
+                        if err:
+                            raise ValueError(msg)
+                        print(f"\033[32m{msg}\033[m")
+                        self.load_info(reload=True)
+            else:
+                print(f"Your puzzle answer was   {answer_2}")
         else:
             print("No solution implemented")
-
-        answer_2 = self.answer_2
-        if not answer_2:
-            if text:
-                print(self.text_2)
-                print()
-            if not test_only:
-                answer = self.solution_2(data)
-                if answer is not None:
-                    err, msg = self.submit(2, answer)
-                    if err:
-                        raise ValueError(msg)
-                    print(f"\033[32m{msg}\033[m")
-                    self.load_info(reload=True)
-        else:
-            print(f"Your puzzle answer was   {answer_2}")

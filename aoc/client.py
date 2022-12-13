@@ -22,6 +22,10 @@ RE_WRONG_ANSWER = re.compile(
 RE_WAIT_ANSWER = re.compile(
     r"(You gave an answer too recently.).*(You have (.*?) left to wait.)"
 )
+RE_UNAVAILABLE = re.compile(
+    r"Please don't repeatedly request this endpoint before it unlocks! "
+    r"The calendar countdown is synchronized with the server time."
+)
 
 
 class AOCException(Exception):
@@ -195,17 +199,18 @@ class Client:
     ):
         url = URL.format(year=year, day=day)
         res = self.session.get(url)
-        soup = BeautifulSoup(res.text, "html.parser")
+        if RE_UNAVAILABLE.match(res.text):
+            raise PuzzleNotAvailable(f"{year}/{day} not available!")
 
+        soup = BeautifulSoup(res.text, "html.parser")
         data = dict()
         eggs = get_easter_eggs(soup)
-
         article = soup.find_all("article")[0]
         title = article.h2.text.replace("-", "").strip()
         test_input = get_test_input(article, test_input_idx)
         text1 = get_text(article)
         test_answer1 = get_test_answer(article, test_answer_idx_1)
-        # print(soup)
+
         p = soup.main.find_all("p", recursive=False)[0]
         answer1 = get_answer(p)
 
