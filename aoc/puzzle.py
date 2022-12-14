@@ -78,10 +78,23 @@ class Puzzle:
 
     def load_info(self, reload=True):
         file = os.path.join(self.root, f"info_{self.year}_{self.day:02}.json")
+        load = reload
+        info = dict()
         if not reload and os.path.exists(file):
             with open(file, "r") as fh:
                 info = dict(json.load(fh))
-        else:
+            # Check if indices still match:
+            inp_idx = info.get("test_input_idx", None)
+            ans_idx1 = info["part_1"].get("test_answer_idx", None)
+            ans_idx2 = info["part_2"].get("test_answer_idx", None)
+            if (
+                inp_idx != self.test_input_idx
+                or ans_idx1 != self.test_answer_idx_1
+                or ans_idx2 != self.test_answer_idx_2
+            ):
+                load = True
+
+        if load:
             info = self.client.get_puzzle(
                 self.year,
                 self.day,
@@ -121,7 +134,7 @@ class Puzzle:
     def solution_2(self, data: str):
         return None
 
-    def run(self, test_only=False, text=True):
+    def run(self, test_only=False, text=False):
         header = f"DAY {self.day:02}: {self.url}"
         print(header)
         print("-" * len(header))

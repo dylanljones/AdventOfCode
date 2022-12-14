@@ -228,8 +228,20 @@ class Client:
         data["title"] = title
         data["easter_eggs"] = eggs
         data["test_input"] = test_input
-        data["part_1"] = {"text": text1, "test_answer": test_answer1, "answer": answer1}
-        data["part_2"] = {"text": text2, "test_answer": test_answer2, "answer": answer2}
+        data["test_input_idx"] = test_input_idx
+
+        data["part_1"] = {
+            "text": text1,
+            "test_answer": test_answer1,
+            "test_answer_idx": test_answer_idx_1,
+            "answer": answer1,
+        }
+        data["part_2"] = {
+            "text": text2,
+            "test_answer": test_answer2,
+            "test_answer_idx": test_answer_idx_2,
+            "answer": answer2,
+        }
 
         return data
 
