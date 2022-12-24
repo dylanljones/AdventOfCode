@@ -4,6 +4,7 @@
 token.txt
 *info.html
 
+node_modules/
 
 # -- Python gitignore ------------------------------------------------------------------
 

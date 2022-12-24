@@ -6,6 +6,8 @@
 
 import os
 import json
+import time
+
 from .client import Client, AOCException
 
 
@@ -15,18 +17,41 @@ class TestAnswerError(AOCException):
         super().__init__(msg)
 
 
+class AnswerError(AOCException):
+    def __init__(self, actual, answer):
+        msg = f"Your answer '{actual}' does not match the submitted answer '{answer}'."
+        super().__init__(msg)
+
+
 class Puzzle:
 
     test_input_idx = 0
     test_answer_idx_1 = -1
     test_answer_idx_2 = -1
 
-    def __init__(self, year, day, root="", token="", headers=None):
+    _file = __file__
+
+    def __init__(self, year=-1, day=-1, root="", token="", headers=None):
+        dirname = os.path.dirname(self._file)
+        if year == -1:
+            path = os.path.dirname(self._file)
+            year_dir, day_dir = os.path.split(path)
+            year_dir = os.path.split(year_dir)[1]
+            year = int(year_dir.replace("year", "").strip("_"))
+            day = int(day_dir.replace("day", "").strip("_"))
+        elif day == -1:
+            path = os.path.dirname(__file__)
+            day_dir = os.path.split(path)[1]
+            day = int(day_dir.replace("day", "").strip("_"))
+
         self.year = year
         self.day = day
-        self.root = root
+        self.root = root or dirname
         self.client = Client(token, headers)
         self.info = None
+
+        self.runs_sol1 = 0
+        self.runs_sol2 = 0
 
         self.load_info(reload=False)
 
@@ -93,6 +118,8 @@ class Puzzle:
                 or ans_idx2 != self.test_answer_idx_2
             ):
                 load = True
+        else:
+            load = True
 
         if load:
             info = self.client.get_puzzle(
@@ -108,6 +135,13 @@ class Puzzle:
                 json.dump(info, fh, indent=4)
 
         self.info = info
+
+    def save_info(self):
+        file = os.path.join(self.root, f"info_{self.year}_{self.day:02}.json")
+        if self.root and not os.path.exists(self.root):
+            os.makedirs(self.root)
+        with open(file, "w") as fh:
+            json.dump(self.info, fh, indent=4)
 
     def get_input(self, reload=False):
         file = os.path.join(self.root, f"input_{self.year}_{self.day:02}.txt")
@@ -134,7 +168,7 @@ class Puzzle:
     def solution_2(self, data: str):
         return None
 
-    def run(self, test_only=False, text=False):
+    def run(self, test_only=False, text=False, rerun=True):
         header = f"DAY {self.day:02}: {self.url}"
         print(header)
         print("-" * len(header))
@@ -145,27 +179,42 @@ class Puzzle:
         print("[Part 1]")
         print()
         test_answer = self.solution_1(test_data)
+        self.runs_sol1 += 1
         if test_answer is not None:
             print(f"Your test answer was     {test_answer}")
             if self.test_answer_1 is not None:
                 if not test_answer == self.test_answer_1:
                     raise TestAnswerError(test_answer, self.test_answer_1)
 
-            answer_1 = self.answer_1
-            if not answer_1:
+            answer = self.answer_1
+            if rerun or answer is None:
                 if text:
                     print(self.text_1)
                     print()
                 if not test_only:
-                    answer = self.solution_1(data)
-                    if answer is not None:
+                    t0 = time.perf_counter()
+                    result = self.solution_1(data)
+                    print("Result", result)
+                    t = time.perf_counter() - t0
+                    if answer is None:
+                        answer = result
+                    answer = type(result)(answer)
+                    if result != answer:
+                        raise AnswerError(result, answer)
+                    self.info["part_1"]["time"] = t
+                    self.save_info()
+                    self.runs_sol1 += 1
+                    if self.answer_1 is None:
                         err, msg = self.submit(1, answer)
                         if err:
                             raise ValueError(msg)
                         print(f"\033[32m{msg}\033[m")
                         self.load_info(reload=True)
+                    print(f"Your puzzle answer was   {answer}")
+                    print(f"Time: {t * 1000:.4f} ms")
             else:
-                print(f"Your puzzle answer was   {answer_1}")
+                print(f"Your puzzle answer was   {answer}")
+                print(f"Time: {self.info['part_1'].get('time', 0) * 1000:.4f} ms")
         else:
             print("No solution implemented")
         print()
@@ -175,26 +224,40 @@ class Puzzle:
         if not self.text_2:
             return
         test_answer = self.solution_2(test_data)
+        self.runs_sol2 += 1
         if test_answer is not None:
             print(f"Your test answer was     {test_answer}")
             if self.test_answer_2 is not None:
                 if not test_answer == self.test_answer_2:
                     raise TestAnswerError(test_answer, self.test_answer_2)
 
-            answer_2 = self.answer_2
-            if not answer_2:
+            answer = self.answer_2
+            if rerun or answer is None:
                 if text:
                     print(self.text_2)
                     print()
                 if not test_only:
-                    answer = self.solution_2(data)
-                    if answer is not None:
+                    t0 = time.perf_counter()
+                    result = self.solution_2(data)
+                    t = time.perf_counter() - t0
+                    if answer is None:
+                        answer = result
+                    answer = type(result)(answer)
+                    if result != answer:
+                        raise AnswerError(result, answer)
+                    self.info["part_2"]["time"] = t
+                    self.save_info()
+                    self.runs_sol2 += 1
+                    if self.answer_2 is None:
                         err, msg = self.submit(2, answer)
                         if err:
                             raise ValueError(msg)
                         print(f"\033[32m{msg}\033[m")
                         self.load_info(reload=True)
+                    print(f"Your puzzle answer was   {answer}")
+                    print(f"Time: {t * 1000:.4f} ms")
             else:
-                print(f"Your puzzle answer was   {answer_2}")
+                print(f"Your puzzle answer was   {answer}")
+                print(f"Time: {self.info['part_2'].get('time', 0) * 1000:.4f} ms")
         else:
             print("No solution implemented")

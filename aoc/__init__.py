@@ -8,6 +8,7 @@
 
 from .client import Client
 from .puzzle import Puzzle
+from .node import Node
 
 
 def parse_numbers_comma(s: str, type_: type = int) -> list:
