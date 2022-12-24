@@ -1,0 +1,20 @@
+{
+    "title": "Day 18: Boiling Boulders",
+    "easter_eggs": [
+        "Unfortunately, you forgot your flint and steel in another dimension."
+    ],
+    "test_input": "2,2,2\n1,2,2\n3,2,2\n2,1,2\n2,3,2\n2,2,1\n2,2,3\n2,2,4\n2,2,6\n1,2,5\n3,2,5\n2,1,5\n2,3,5\n",
+    "test_input_idx": 0,
+    "part_1": {
+        "text": "You and the elephants finally reach fresh air.\nYou've emerged near the base of a large volcano that seems to be actively erupting! Fortunately, the lava seems to be flowing away from you and toward the ocean.\n\nBits of lava are still being ejected toward you, so you're sheltering in the cavern exit a little longer.\nOutside the cave, you can see the lava landing in a pond and hear it loudly hissing as it solidifies.\n\nDepending on the specific compounds in the lava and speed at which it cools, it might be forming obsidian! The cooling rate should be based on the surface area of the lava droplets, so you take a quick scan of a droplet as it flies past you (your puzzle input).\n\nBecause of how quickly the lava is moving, the scan isn't very good; its resolution is quite low and, as a result, it approximates the shape of the lava droplet with 1x1x1 cubes on a 3D grid, each given as its x,y,z position.\n\nTo approximate the surface area, count the number of sides of each cube that are not immediately connected to another cube.\nSo, if your scan were only two adjacent cubes like 1,1,1 and 2,1,1, each cube would have a single side covered and five sides exposed, a total surface area of 10 sides.\n\nHere's a larger example:\n\n2,2,2\n1,2,2\n3,2,2\n2,1,2\n2,3,2\n2,2,1\n2,2,3\n2,2,4\n2,2,6\n1,2,5\n3,2,5\n2,1,5\n2,3,5\n\nIn the above example, after counting up all the sides that aren't connected to another cube, the total surface area is 64.\n\nWhat is the surface area of your scanned lava droplet?",
+        "test_answer": 64,
+        "test_answer_idx": -1,
+        "answer": "3498"
+    },
+    "part_2": {
+        "text": "Something seems off about your calculation.\nThe cooling rate depends on exterior surface area, but your calculation also included the surface area of air pockets trapped in the lava droplet.\n\nInstead, consider only cube sides that could be reached by the water and steam as the lava droplet tumbles into the pond.\nThe steam will expand to reach as much as possible, completely displacing any air on the outside of the lava droplet but never expanding diagonally.\n\nIn the larger example above, exactly one cube of air is trapped within the lava droplet (at 2,2,5), so the exterior surface area of the lava droplet is 58.\n\nWhat is the exterior surface area of your scanned lava droplet?",
+        "test_answer": 58,
+        "test_answer_idx": -1,
+        "answer": "2008"
+    }
+}
