@@ -32,7 +32,6 @@ def dirsize2(files: dict, dirname: str) -> int:
 
 
 class Solution(aoc.Puzzle):
-
     test_input_idx = 1
     test_answer_idx_1 = -1
     test_answer_idx_2 = -1

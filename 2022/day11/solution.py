@@ -20,7 +20,6 @@ RE_TEST_FALSE = re.compile("If false: throw to monkey (.*?)$")
 
 @dataclass
 class Monkey:
-
     idx: int
     items: list
     operation: Callable

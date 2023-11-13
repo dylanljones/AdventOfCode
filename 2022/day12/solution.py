@@ -37,7 +37,6 @@ def get_neighbors(hmap, pos):
 
 
 class Solution(aoc.Puzzle):
-
     test_answer_idx_2 = -2
 
     def __init__(self):

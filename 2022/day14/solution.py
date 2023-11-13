@@ -45,7 +45,6 @@ def get_occupied_below(occupied, pos):
 
 
 class Solution(aoc.Puzzle):
-
     test_answer_idx_1 = -3
     test_answer_idx_2 = -2
 

@@ -17,7 +17,6 @@ DIRECTIONS = {
 
 
 class Solution(aoc.Puzzle):
-
     test_input_idx = 3
     test_answer_idx_2 = -7
 
