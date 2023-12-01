@@ -7,6 +7,7 @@
 import os
 import re
 from datetime import datetime, timedelta
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -216,28 +217,46 @@ class Client:
 
         try:
             article = soup.find_all("article")[1]
-            text2 = get_text(article)
-            test_answer2 = get_test_answer(article, test_answer_idx_2)
-            p = soup.main.find_all("p", recursive=False)[1]
-            answer2 = get_answer(p)
         except IndexError:
             text2 = None
+            test_input2 = None
             test_answer2 = None
             answer2 = None
 
+        if article:
+            try:
+                text2 = get_text(article)
+            except IndexError:
+                text2 = None
+            try:
+                test_input2 = get_test_input(article, test_input_idx)
+            except IndexError:
+                test_input2 = test_input
+            try:
+                test_answer2 = get_test_answer(article, test_answer_idx_2)
+            except IndexError:
+                test_answer2 = None
+            try:
+                p = soup.main.find_all("p", recursive=False)[1]
+                answer2 = get_answer(p)
+            except IndexError:
+                answer2 = None
+
         data["title"] = title
         data["easter_eggs"] = eggs
-        data["test_input"] = test_input
+        # data["test_input"] = test_input
         data["test_input_idx"] = test_input_idx
 
         data["part_1"] = {
             "text": text1,
+            "test_input": test_input,
             "test_answer": test_answer1,
             "test_answer_idx": test_answer_idx_1,
             "answer": answer1,
         }
         data["part_2"] = {
             "text": text2,
+            "test_input": test_input2,
             "test_answer": test_answer2,
             "test_answer_idx": test_answer_idx_2,
             "answer": answer2,

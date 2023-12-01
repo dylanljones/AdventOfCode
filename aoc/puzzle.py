@@ -4,11 +4,11 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
-import os
 import json
+import os
 import time
 
-from .client import Client, AOCException
+from .client import AOCException, Client
 
 
 class TestAnswerError(AOCException):
@@ -24,7 +24,6 @@ class AnswerError(AOCException):
 
 
 class Puzzle:
-
     test_input_idx = 0
     test_answer_idx_1 = -1
     test_answer_idx_2 = -1
@@ -156,8 +155,8 @@ class Puzzle:
                 fh.write(data)
         return data
 
-    def get_test_input(self):
-        return self.info["test_input"]
+    def get_test_input(self, part=1):
+        return self.info[f"part_{part}"]["test_input"]
 
     def submit(self, part, answer):
         return self.client.submit(self.year, self.day, part, answer)
@@ -168,12 +167,12 @@ class Puzzle:
     def solution_2(self, data: str):
         return None
 
-    def run(self, test_only=False, text=False, rerun=True):
+    def run(self, puzzle_only=False, test_only=False, text=False, rerun=True):
         header = f"DAY {self.day:02}: {self.url}"
         print(header)
         print("-" * len(header))
 
-        test_data = self.get_test_input()
+        test_data = self.get_test_input(part=1)
         data = self.get_input()
 
         print("[Part 1]")
@@ -181,10 +180,11 @@ class Puzzle:
         test_answer = self.solution_1(test_data)
         self.runs_sol1 += 1
         if test_answer is not None:
-            print(f"Your test answer was     {test_answer}")
-            if self.test_answer_1 is not None:
-                if not test_answer == self.test_answer_1:
-                    raise TestAnswerError(test_answer, self.test_answer_1)
+            if not puzzle_only:
+                print(f"Your test answer was     {test_answer}")
+                if self.test_answer_1 is not None:
+                    if not test_answer == self.test_answer_1:
+                        raise TestAnswerError(test_answer, self.test_answer_1)
 
             answer = self.answer_1
             if rerun or answer is None:
@@ -223,13 +223,15 @@ class Puzzle:
         print()
         if not self.text_2:
             return
+        test_data = self.get_test_input(part=2)
         test_answer = self.solution_2(test_data)
         self.runs_sol2 += 1
         if test_answer is not None:
-            print(f"Your test answer was     {test_answer}")
-            if self.test_answer_2 is not None:
-                if not test_answer == self.test_answer_2:
-                    raise TestAnswerError(test_answer, self.test_answer_2)
+            if not puzzle_only:
+                print(f"Your test answer was     {test_answer}")
+                if self.test_answer_2 is not None:
+                    if not test_answer == self.test_answer_2:
+                        raise TestAnswerError(test_answer, self.test_answer_2)
 
             answer = self.answer_2
             if rerun or answer is None:

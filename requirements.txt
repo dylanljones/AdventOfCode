@@ -1,5 +1,4 @@
 -e aoc
-pytest
 requests
 bs4
 numpy

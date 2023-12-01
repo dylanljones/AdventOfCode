@@ -1,13 +1,37 @@
 
-# -- Black -----------------------------------------------------------------------------
+# -- Ruff ------------------------------------------------------------------------------
 
-[tool.black]
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".git",
+    ".idea",
+    "__pycache__",
+    "build",
+    "dist",
+    "_version.py",
+    ".ruff_cache",
+    "__pypackages__",
+    "main*.py"
+]
 line-length = 88
-include = '\.pyi?$'
-exclude = "__init__.py|__main__.py|_version.py"
-force-exclude = """
-/(
-    anlz/structs.py |
-    mysettings/structs.py
-)\
-"""
+indent-width = 4
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+select = ["E", "F"]
+ignore = []
+# Enable the isort rules.
+extend-select = ["I"]
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests.py" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
