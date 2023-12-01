@@ -1,0 +1,21 @@
+{
+    "title": "Day 1: Trebuchet?!",
+    "easter_eggs": [
+        "My hope is that this abomination of a run-on sentence somehow conveys the chaos of being hastily loaded into a trebuchet."
+    ],
+    "test_input_idx": 0,
+    "part_1": {
+        "text": "Something is wrong with global snow production, and you've been selected to take a look.\nThe Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.\n\nYou've been doing this long enough to know that to restore snow operations, you need to check all fifty stars by December 25th.\n\nCollect stars by solving puzzles.\n Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first.\n Each puzzle grants one star.\nGood luck!\n\nYou try to ask why they can't just use a weather machine (\"not powerful enough\") and where they're even sending you (\"the sky\") and why your map looks mostly blank (\"you sure ask a lot of questions\") and hang on did you just say the sky (\"of course, where do you think snow comes from\") when you realize that the Elves are already loading you into a trebuchet (\"please hold still, we need to strap you in\").\n\nAs they're making the final adjustments, they discover that their calibration document (your puzzle input) has been amended by a very young Elf who was apparently just excited to show off her art skills.\nConsequently, the Elves are having trouble reading the values on the document.\n\nThe newly-improved calibration document consists of lines of text; each line originally contained a specific calibration value that the Elves now need to recover.\nOn each line, the calibration value can be found by combining the first digit and the last digit (in that order) to form a single two-digit number.\n\nFor example:\n\n1abc2\npqr3stu8vwx\na1b2c3d4e5f\ntreb7uchet\n\nIn this example, the calibration values of these four lines are 12, 38, 15, and 77.\nAdding these together produces 142.\n\nConsider your entire calibration document.\nWhat is the sum of all of the calibration values?",
+        "test_input": "1abc2\npqr3stu8vwx\na1b2c3d4e5f\ntreb7uchet\n",
+        "test_answer": 142,
+        "test_answer_idx": -1,
+        "answer": "55834"
+    },
+    "part_2": {
+        "text": "Your calculation isn't quite right.\nIt looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid \"digits\".\n\nEquipped with this new information, you now need to find the real first and last digit on each line.\nFor example:\n\ntwo1nine\neightwothree\nabcone2threexyz\nxtwone3four\n4nineeightseven2\nzoneight234\n7pqrstsixteen\n\nIn this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76.\nAdding these together produces 281.\n\nWhat is the sum of all of the calibration values?",
+        "test_input": "two1nine\neightwothree\nabcone2threexyz\nxtwone3four\n4nineeightseven2\nzoneight234\n7pqrstsixteen\n",
+        "test_answer": 281,
+        "test_answer_idx": -1,
+        "answer": "53221"
+    }
+}
