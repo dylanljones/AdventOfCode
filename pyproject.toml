@@ -28,7 +28,7 @@ fixable = ["ALL"]
 unfixable = []
 
 [tool.ruff.lint.per-file-ignores]
-"tests.py" = ["E402"]
+"*__init__.py" = ["F401"]
 
 [tool.ruff.format]
 quote-style = "double"
