@@ -8,8 +8,6 @@ NUMBERS = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine
 
 
 class Solution(aoc.Puzzle):
-    _file = __file__
-
     def __init__(self):
         super().__init__(2023, 1)
 
