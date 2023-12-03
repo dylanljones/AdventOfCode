@@ -17,9 +17,7 @@ STATS_URL = "https://adventofcode.com/{year}/leaderboard/self"
 USER_AGENT = "github.com/dylanljones/aoc2022"
 
 RE_RIGHT_ANSWER = re.compile("That's the right answer.")
-RE_WRONG_ANSWER = re.compile(
-    r"(That's not the right answer.).*If you're stuck,(.*?)You guessed (?P<val>.*)\."
-)
+RE_WRONG_ANSWER = re.compile(r"(That's not the right answer.).*If you're stuck,(.*?)")
 RE_WAIT_ANSWER = re.compile(
     r"(You gave an answer too recently.).*(You have (.*?) left to wait.)"
 )
@@ -119,7 +117,7 @@ def get_answer(p):
 def parse_submit_msg(text):
     match = RE_WRONG_ANSWER.search(text)
     if match:
-        msg = f"{match.group(1).strip()} You guessed '{match.group(3)}'."
+        msg = f"{match.group(1).strip()}."
         return 1, msg
 
     match = RE_WAIT_ANSWER.search(text)
