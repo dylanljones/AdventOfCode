@@ -6,6 +6,7 @@
 import collections
 import itertools
 import re
+
 import aoc
 
 RE_LINE = re.compile(
@@ -24,7 +25,6 @@ def parse_data(data: str):
 
 
 class Solution(aoc.Puzzle):
-
     _file = __file__
 
     def __init__(self):

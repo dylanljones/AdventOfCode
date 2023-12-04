@@ -6,9 +6,10 @@
 import math
 import os
 import re
-import aoc
 from dataclasses import dataclass
 from typing import Callable
+
+import aoc
 
 RE_MONKEY = re.compile("Monkey (.*?):$")
 RE_STARTING = re.compile("Starting items: (.*?)$")
@@ -20,7 +21,6 @@ RE_TEST_FALSE = re.compile("If false: throw to monkey (.*?)$")
 
 @dataclass
 class Monkey:
-
     idx: int
     items: list
     operation: Callable

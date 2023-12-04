@@ -5,6 +5,7 @@
 # Copyright (c) 2022, Dylan Jones
 
 import itertools
+
 import aoc
 
 WIDTH = 7
@@ -64,7 +65,6 @@ class Rock:
 
 
 class Solution(aoc.Puzzle):
-
     _file = __file__
     test_input_idx = 1
     test_answer_idx_2 = -2

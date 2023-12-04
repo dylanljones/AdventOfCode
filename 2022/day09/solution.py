@@ -5,7 +5,9 @@
 # Copyright (c) 2022, Dylan Jones
 
 import os
+
 import numpy as np
+
 import aoc
 
 DIRECTIONS = {
@@ -17,7 +19,6 @@ DIRECTIONS = {
 
 
 class Solution(aoc.Puzzle):
-
     test_input_idx = 3
     test_answer_idx_2 = -7
 

@@ -8,7 +8,6 @@ import aoc
 
 
 class Solution(aoc.Puzzle):
-
     test_answer_idx_1 = -9
     test_answer_idx_2 = -9
 
