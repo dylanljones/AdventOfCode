@@ -24,9 +24,12 @@ class AnswerError(AOCException):
 
 
 class Puzzle:
-    test_input_idx = 0
+    test_input_idx_1 = 0
+    test_input_idx_2 = 0
     test_answer_idx_1 = -1
     test_answer_idx_2 = -1
+
+    second_test_input = None
 
     _file = __file__
 
@@ -112,7 +115,7 @@ class Puzzle:
             ans_idx1 = info["part_1"].get("test_answer_idx", None)
             ans_idx2 = info["part_2"].get("test_answer_idx", None)
             if (
-                inp_idx != self.test_input_idx
+                inp_idx != self.test_input_idx_1
                 or ans_idx1 != self.test_answer_idx_1
                 or ans_idx2 != self.test_answer_idx_2
             ):
@@ -124,7 +127,8 @@ class Puzzle:
             info = self.client.get_puzzle(
                 self.year,
                 self.day,
-                self.test_input_idx,
+                self.test_input_idx_1,
+                self.test_input_idx_2,
                 self.test_answer_idx_1,
                 self.test_answer_idx_2,
             )

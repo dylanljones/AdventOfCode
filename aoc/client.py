@@ -194,7 +194,7 @@ class Client:
         return results
 
     def get_puzzle(
-        self, year, day, test_input_idx=0, test_answer_idx_1=-1, test_answer_idx_2=-1
+        self, year, day, test_input_idx_1=0, test_input_idx_2=0, test_answer_idx_1=-1, test_answer_idx_2=-1
     ):
         url = URL.format(year=year, day=day)
         res = self.session.get(url)
@@ -206,7 +206,7 @@ class Client:
         eggs = get_easter_eggs(soup)
         article = soup.find_all("article")[0]
         title = article.h2.text.replace("-", "").strip()
-        test_input = get_test_input(article, test_input_idx)
+        test_input = get_test_input(article, test_input_idx_1)
         text1 = get_text(article)
         test_answer1 = get_test_answer(article, test_answer_idx_1)
 
@@ -226,9 +226,12 @@ class Client:
                 text2 = get_text(article)
             except IndexError:
                 text2 = None
-            try:
-                test_input2 = get_test_input(article, test_input_idx)
-            except IndexError:
+            if test_input_idx_2 is not None:
+                try:
+                    test_input2 = get_test_input(article, test_input_idx_2)
+                except IndexError:
+                    test_input2 = test_input
+            else:
                 test_input2 = test_input
             try:
                 test_answer2 = get_test_answer(article, test_answer_idx_2)
@@ -243,7 +246,7 @@ class Client:
         data["title"] = title
         data["easter_eggs"] = eggs
         # data["test_input"] = test_input
-        data["test_input_idx"] = test_input_idx
+        data["test_input_idx"] = test_input_idx_1
 
         data["part_1"] = {
             "text": text1,
