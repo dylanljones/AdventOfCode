@@ -51,7 +51,6 @@ def apply_range(conv, ranges):
 
 
 class Solution(aoc.Puzzle):
-
     _file = __file__
     test_input_idx_2 = None
 
