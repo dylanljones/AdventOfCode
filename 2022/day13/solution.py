@@ -4,8 +4,9 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
-import os
 import ast
+import os
+
 import aoc
 
 

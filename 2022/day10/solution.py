@@ -5,11 +5,11 @@
 # Copyright (c) 2022, Dylan Jones
 
 import os
+
 import aoc
 
 
 class Solution(aoc.Puzzle):
-
     test_input_idx = 1
 
     def __init__(self):
@@ -55,7 +55,6 @@ class Solution(aoc.Puzzle):
 
         cycle = 1
         while lines or count:
-
             if count == 0:
                 instr = lines.pop(0).strip()
                 if instr == "noop":

@@ -4,14 +4,15 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
-import os
 import itertools
+import os
+
 import numpy as np
+
 import aoc
 
 
 class Solution(aoc.Puzzle):
-
     test_input_idx = 0
     test_answer_idx_1 = -1
     test_answer_idx_2 = -2

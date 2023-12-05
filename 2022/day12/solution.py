@@ -5,9 +5,11 @@
 # Copyright (c) 2022, Dylan Jones
 
 import os
-import numpy as np
-import aoc
 from collections import deque
+
+import numpy as np
+
+import aoc
 
 
 def parse_map(data):
@@ -37,7 +39,6 @@ def get_neighbors(hmap, pos):
 
 
 class Solution(aoc.Puzzle):
-
     test_answer_idx_2 = -2
 
     def __init__(self):
