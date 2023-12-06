@@ -50,9 +50,9 @@ puzzle data and can be used to supply and submit answers.
 from aoc import Puzzle
 
 class Solution(Puzzle):
-
-    def __init__(self):
-        super().__init__(year=2015, day=1)
+    _file = __file__  # Store data in same directory
+    year = 2015
+    day = 1
 
     def solution_1(self, data: str):
         ...
@@ -72,5 +72,10 @@ sol.run(test_only=False, text=True)
 
 If the first solution was correct, the ``Puzzle`` object will update the puzzle info
 before running the second part.
+
+You can initialize a solution directory with the included CLI script:
+```bash
+python create.py -d 1 -y 2015
+```
 
 [Advent of Code]: https://adventofcode.com/2022
