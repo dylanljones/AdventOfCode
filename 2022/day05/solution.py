@@ -6,6 +6,7 @@
 
 import os
 import re
+
 import aoc
 
 RE_MOVE = re.compile(r"move (.*?) from (.*?) to (.*?)$")
