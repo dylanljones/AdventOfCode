@@ -25,7 +25,7 @@ def parse_data(data: str):
 
 
 class Solution(aoc.Puzzle):
-    _file = __file__
+    file = __file__
 
     def __init__(self):
         super().__init__()

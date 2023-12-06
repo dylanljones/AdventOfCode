@@ -19,7 +19,6 @@ def solve_roots_int(t, d):
 
 
 class Solution(aoc.Puzzle):
-    _file = __file__
     day = 6
     year = 2023
     test_answer_idx_1 = -4

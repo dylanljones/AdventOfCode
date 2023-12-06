@@ -20,10 +20,8 @@ def parse_game(line):
 
 
 class Solution(aoc.Puzzle):
-    _file = __file__
-
-    def __init__(self):
-        super().__init__(2023, 2)
+    year = 2023
+    day = 2
 
     def solution_1(self, data: str):
         total = {"red": 12, "green": 13, "blue": 14}

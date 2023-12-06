@@ -6,10 +6,8 @@ import aoc
 
 
 class Solution(aoc.Puzzle):
-    _file = __file__
-
-    def __init__(self):
-        super().__init__()
+    year = 2023
+    day = 4
 
     def solution_1(self, data: str):
         lines = [line.strip() for line in data.splitlines(keepends=False)]

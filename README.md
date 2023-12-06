@@ -49,8 +49,8 @@ puzzle data and can be used to supply and submit answers.
 ````python
 from aoc import Puzzle
 
+
 class Solution(Puzzle):
-    _file = __file__  # Store data in same directory
     year = 2015
     day = 1
 

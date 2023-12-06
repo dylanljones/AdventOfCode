@@ -8,8 +8,8 @@ NUMBERS = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine
 
 
 class Solution(aoc.Puzzle):
-    def __init__(self):
-        super().__init__(2023, 1)
+    year = 2023
+    day = 1
 
     def solution_1(self, data: str):
         lines = [line.strip() for line in data.splitlines(keepends=False)]

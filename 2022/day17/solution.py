@@ -65,7 +65,7 @@ class Rock:
 
 
 class Solution(aoc.Puzzle):
-    _file = __file__
+    file = __file__
     test_input_idx = 1
     test_answer_idx_2 = -2
 

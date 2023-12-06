@@ -4,6 +4,7 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
+import importlib
 import json
 import os
 import time
@@ -24,26 +25,30 @@ class AnswerError(AOCException):
 
 
 class Puzzle:
+    file = None
+    day = None
+    year = None
+
     test_input_idx_1 = 0
     test_input_idx_2 = 0
     test_answer_idx_1 = -1
     test_answer_idx_2 = -1
-    day = None
-    year = None
 
     second_test_input = None
 
-    _file = __file__
-
     def __init__(self, year=-1, day=-1, root="", token="", headers=None):
-        dirname = os.path.dirname(self._file)
+        if self.file is None:
+            m = importlib.import_module(self.__module__)
+            self.file = m.__file__
+
+        dirname = os.path.dirname(self.file)
         if Puzzle.day is not None:
             day = Puzzle.day
         if Puzzle.year is not None:
             year = Puzzle.year
 
         if year == -1:
-            path = os.path.dirname(self._file)
+            path = os.path.dirname(self.file)
             year_dir, day_dir = os.path.split(path)
             year_dir = os.path.split(year_dir)[1]
             year = int(year_dir.replace("year", "").strip("_"))
@@ -62,7 +67,7 @@ class Puzzle:
         self.runs_sol1 = 0
         self.runs_sol2 = 0
 
-        self.load_info(reload=False)
+        # self.load_info(reload=False)
 
     @property
     def url(self):

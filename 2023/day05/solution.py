@@ -51,11 +51,9 @@ def apply_range(conv, ranges):
 
 
 class Solution(aoc.Puzzle):
-    _file = __file__
+    year = 2023
+    day = 5
     test_input_idx_2 = None
-
-    def __init__(self):
-        super().__init__(2023, 5)
 
     def solution_1(self, data: str):
         seeds, conversions = parse_input(data)
