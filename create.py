@@ -16,7 +16,6 @@ import aoc
 
 
 class Solution(aoc.Puzzle):
-
     _file = __file__
     day = {day}
     year = {year}
