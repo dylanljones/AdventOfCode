@@ -27,11 +27,18 @@ class Puzzle:
     test_input_idx = 0
     test_answer_idx_1 = -1
     test_answer_idx_2 = -1
+    day = None
+    year = None
 
     _file = __file__
 
     def __init__(self, year=-1, day=-1, root="", token="", headers=None):
         dirname = os.path.dirname(self._file)
+        if Puzzle.day is not None:
+            day = Puzzle.day
+        if Puzzle.year is not None:
+            year = Puzzle.year
+
         if year == -1:
             path = os.path.dirname(self._file)
             year_dir, day_dir = os.path.split(path)
