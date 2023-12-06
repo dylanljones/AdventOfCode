@@ -67,7 +67,7 @@ class Puzzle:
         self.runs_sol1 = 0
         self.runs_sol2 = 0
 
-        # self.load_info(reload=False)
+        self.load_info(reload=False)
 
     @property
     def url(self):
