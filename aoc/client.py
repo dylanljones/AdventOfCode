@@ -194,7 +194,13 @@ class Client:
         return results
 
     def get_puzzle(
-        self, year, day, test_input_idx_1=0, test_input_idx_2=0, test_answer_idx_1=-1, test_answer_idx_2=-1
+        self,
+        year,
+        day,
+        test_input_idx_1=0,
+        test_input_idx_2=0,
+        test_answer_idx_1=-1,
+        test_answer_idx_2=-1,
     ):
         url = URL.format(year=year, day=day)
         res = self.session.get(url)
@@ -206,9 +212,13 @@ class Client:
         eggs = get_easter_eggs(soup)
         article = soup.find_all("article")[0]
         title = article.h2.text.replace("-", "").strip()
-        test_input = get_test_input(article, test_input_idx_1)
         text1 = get_text(article)
-        test_answer1 = get_test_answer(article, test_answer_idx_1)
+        if test_input_idx_1 is not None:
+            test_input = get_test_input(article, test_input_idx_1)
+            test_answer1 = get_test_answer(article, test_answer_idx_1)
+        else:
+            test_input = None
+            test_answer1 = None
 
         p = soup.main.find_all("p", recursive=False)[0]
         answer1 = get_answer(p)

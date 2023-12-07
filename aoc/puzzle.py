@@ -31,9 +31,12 @@ class Puzzle:
 
     test_input_idx_1 = 0
     test_input_idx_2 = 0
+    test_input_1 = None
+    test_solution_1 = None
     test_answer_idx_1 = -1
     test_answer_idx_2 = -1
-
+    test_input_2 = None
+    test_solution_2 = None
     second_test_input = None
 
     def __init__(self, year=-1, day=-1, root="", token="", headers=None):
@@ -66,6 +69,7 @@ class Puzzle:
 
         self.runs_sol1 = 0
         self.runs_sol2 = 0
+        self.runs = {1: 0, 2: 0}
 
         self.load_info(reload=False)
 
@@ -119,9 +123,18 @@ class Puzzle:
         file = os.path.join(self.root, f"info_{self.year}_{self.day:02}.json")
         load = reload
         info = dict()
+        if self.test_input_1 is not None:
+            self.test_input_idx_1 = None
+        if self.test_solution_1 is not None:
+            self.test_answer_idx_1 = None
+        if self.test_input_2 is not None:
+            self.test_input_idx_2 = None
+        if self.test_solution_2 is not None:
+            self.test_answer_idx_2 = None
         if not reload and os.path.exists(file):
             with open(file, "r") as fh:
                 info = dict(json.load(fh))
+
             # Check if indices still match:
             inp_idx = info.get("test_input_idx", None)
             ans_idx1 = info["part_1"].get("test_answer_idx", None)
@@ -183,99 +196,88 @@ class Puzzle:
     def solution_2(self, data: str):
         return None
 
+    def run_test(self, part, puzzle_only):
+        solution_func = self.solution_1 if part == 1 else self.solution_2
+
+        test_data = self.get_test_input(part=part)
+        if test_data is None:
+            test_data = self.test_input_1 if part == 1 else self.test_input_2
+        test_solution = self.info[f"part_{part}"]["test_answer"]
+        if test_solution is None:
+            test_solution = self.test_solution_1 if part == 1 else self.test_solution_2
+
+        test_available = test_data is not None and test_solution is not None
+        solution_available = True
+        if test_available and not puzzle_only:
+            test_answer = solution_func(test_data)
+            if test_answer is None:
+                solution_available = False
+            if solution_available:
+                self.runs[part] += 1
+                print(f"Your test answer was     {test_answer}")
+                if not test_answer == test_solution:
+                    raise TestAnswerError(test_answer, test_solution)
+            else:
+                print("No solution implemented")
+        return test_available, solution_available
+
+    def run_puzzle(self, part, test_only=False, text=False, rerun=True):
+        solution_func = self.solution_1 if part == 1 else self.solution_2
+
+        solution = self.info[f"part_{part}"]["answer"]
+        puzzle_text = self.info[f"part_{part}"]["text"]
+
+        if rerun or solution is None:
+            if text:
+                print(puzzle_text)
+                print()
+            if not test_only:
+                data = self.get_input()
+                t0 = time.perf_counter()
+                result = solution_func(data)
+                if result is None:
+                    print("No solution implemented")
+                else:
+                    print("Result", result)
+                    t = time.perf_counter() - t0
+                    if solution is None:
+                        solution = result
+                    solution = type(result)(solution)
+                    if result != solution:
+                        raise AnswerError(result, solution)
+                    self.info[f"part_{part}"]["time"] = t
+                    self.save_info()
+                    self.runs[part] += 1
+                    if self.info[f"part_{part}"]["answer"] is None:
+                        err, msg = self.submit(part, solution)
+                        if err:
+                            raise ValueError(msg)
+                        print(f"\033[32m{msg}\033[m")
+                        self.load_info(reload=True)
+                    print(f"Your puzzle answer was   {solution}")
+                    print(f"Time: {t * 1000:.4f} ms")
+        else:
+            print(f"Your puzzle answer was   {solution}")
+            print(f"Time: {self.info[f'part_{part}'].get('time', 0) * 1000:.4f} ms")
+
     def run(self, puzzle_only=False, test_only=False, text=False, rerun=True):
         header = f"DAY {self.day:02}: {self.url}"
         print(header)
         print("-" * len(header))
 
-        test_data = self.get_test_input(part=1)
-        data = self.get_input()
-
         print("[Part 1]")
         print()
-        test_answer = self.solution_1(test_data)
-        self.runs_sol1 += 1
-        if test_answer is not None:
-            if not puzzle_only:
-                print(f"Your test answer was     {test_answer}")
-                if self.test_answer_1 is not None:
-                    if not test_answer == self.test_answer_1:
-                        raise TestAnswerError(test_answer, self.test_answer_1)
-
-            answer = self.answer_1
-            if rerun or answer is None:
-                if text:
-                    print(self.text_1)
-                    print()
-                if not test_only:
-                    t0 = time.perf_counter()
-                    result = self.solution_1(data)
-                    print("Result", result)
-                    t = time.perf_counter() - t0
-                    if answer is None:
-                        answer = result
-                    answer = type(result)(answer)
-                    if result != answer:
-                        raise AnswerError(result, answer)
-                    self.info["part_1"]["time"] = t
-                    self.save_info()
-                    self.runs_sol1 += 1
-                    if self.answer_1 is None:
-                        err, msg = self.submit(1, answer)
-                        if err:
-                            raise ValueError(msg)
-                        print(f"\033[32m{msg}\033[m")
-                        self.load_info(reload=True)
-                    print(f"Your puzzle answer was   {answer}")
-                    print(f"Time: {t * 1000:.4f} ms")
-            else:
-                print(f"Your puzzle answer was   {answer}")
-                print(f"Time: {self.info['part_1'].get('time', 0) * 1000:.4f} ms")
-        else:
-            print("No solution implemented")
+        part = 1
+        test_available, solution_available = self.run_test(part, puzzle_only)
+        if solution_available and not test_only:
+            self.run_puzzle(part, test_only, text, rerun)
         print()
 
         print("[Part 2]")
         print()
-        if not self.text_2:
+        part = 2
+        if not self.info[f"part_{part}"]["text"]:
             return
-        test_data = self.get_test_input(part=2)
-        test_answer = self.solution_2(test_data)
-        self.runs_sol2 += 1
-        if test_answer is not None:
-            if not puzzle_only:
-                print(f"Your test answer was     {test_answer}")
-                if self.test_answer_2 is not None:
-                    if not test_answer == self.test_answer_2:
-                        raise TestAnswerError(test_answer, self.test_answer_2)
-
-            answer = self.answer_2
-            if rerun or answer is None:
-                if text:
-                    print(self.text_2)
-                    print()
-                if not test_only:
-                    t0 = time.perf_counter()
-                    result = self.solution_2(data)
-                    t = time.perf_counter() - t0
-                    if answer is None:
-                        answer = result
-                    answer = type(result)(answer)
-                    if result != answer:
-                        raise AnswerError(result, answer)
-                    self.info["part_2"]["time"] = t
-                    self.save_info()
-                    self.runs_sol2 += 1
-                    if self.answer_2 is None:
-                        err, msg = self.submit(2, answer)
-                        if err:
-                            raise ValueError(msg)
-                        print(f"\033[32m{msg}\033[m")
-                        self.load_info(reload=True)
-                    print(f"Your puzzle answer was   {answer}")
-                    print(f"Time: {t * 1000:.4f} ms")
-            else:
-                print(f"Your puzzle answer was   {answer}")
-                print(f"Time: {self.info['part_2'].get('time', 0) * 1000:.4f} ms")
-        else:
-            print("No solution implemented")
+        test_available, solution_available = self.run_test(part, puzzle_only)
+        if solution_available and not test_only:
+            self.run_puzzle(part, test_only, text, rerun)
