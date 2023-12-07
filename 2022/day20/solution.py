@@ -44,12 +44,6 @@ class Solution(aoc.Puzzle):
         return res
 
 
-def new_index(sequence, idx, delta):
-    n = len(sequence)
-    new_idx = (idx + delta) % (n - 1)
-    return new_idx
-
-
 if __name__ == "__main__":
     puzzle = Solution()
     puzzle.run(test_only=False)
