@@ -1,8 +1,8 @@
 Advent of Code
 =================
 
-[![AoC 2022](https://img.shields.io/badge/2022-⭐%20_42-yellow)](https://adventofcode.com/2022)
-[![AoC 2023](https://img.shields.io/badge/2023-⭐%20_16-yellow)](https://adventofcode.com/2023)
+[![AoC 2022](https://img.shields.io/badge/⭐_2022-42-yellow)](https://adventofcode.com/2022)
+[![AoC 2023](https://img.shields.io/badge/⭐_2023-16-yellow)](https://adventofcode.com/2023)
 
 
 🎄 My solutions for [Advent of Code]

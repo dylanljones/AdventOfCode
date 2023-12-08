@@ -18,16 +18,20 @@ jobs:
         with:
           userid: 2300201                        # your user id, see setup on how to obtain
           session: ${{ secrets.AOC_SESSION }}    # secret containing session code, see setup on how to obtain
-
-#         Optional inputs:
-          starsRegex: '(?<=https:\/\/img\.shields\.io\/badge\/2023-⭐%20_)[0-9]+(?=-yellow)'
-
-#
-#          year: 2021                                                                                     # The year for which stats should be retrieved
+          year: 2023
+          starsRegex: '(?<=https:\/\/img\.shields\.io\/badge\/⭐_2023-)[0-9]+(?=-yellow)'
+#          Other inputs:
 #          leaderboard: 'https://adventofcode.com/2020/leaderboard/private/view/00000.json'               # The url of the leaderboard from witch the data is fetched. Typically your private leaderboard.
 #          file: 'README.md'                                                                              # The file that contains the badges
 #          dayRegex: '(?<=https:\/\/img\.shields\.io\/badge\/day%20📅-)[0-9]+(?=-blue)'                   # Regular expression that finds the content of the day badge in your file.# Regular expression that finds the content of the stars badge in your file.
 #          daysCompletedRegex: '(?<=https:\/\/img\.shields\.io\/badge\/days%20completed-)[0-9]+(?=-red)'  # Regular expression that finds the content of the days completed badge iun your file.
+
+      - uses: joblo2213/aoc-badges-action@v3
+        with:
+          userid: 2300201
+          session: ${{ secrets.AOC_SESSION }}
+          year: 2022
+          starsRegex: '(?<=https:\/\/img\.shields\.io\/badge\/⭐_2022-)[0-9]+(?=-yellow)'
 
       - uses: stefanzweifel/git-auto-commit-action@v4     # Step that pushes these local changes back to your github repo
         with:
