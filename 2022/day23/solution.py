@@ -34,7 +34,6 @@ def get_neighbors(pos, directions=None):
 
 def parse_input(data: str):
     lines = [line.strip() for line in data.splitlines(keepends=False)]
-    # height, width = len(lines), len(lines[0])
     elves = set()
     for r, line in enumerate(lines):
         for c, char in enumerate(line):
