@@ -1,0 +1,23 @@
+{
+    "title": "Day 8: Haunted Wasteland",
+    "easter_eggs": [
+        "Duhduhduhduhduh! Dah, duhduhduhduhduh!"
+    ],
+    "test_input_idx": -1,
+    "part_1": {
+        "text": "You're still riding a camel across Desert Island when you spot a sandstorm quickly approaching.\nWhen you turn to warn the Elf, she disappears before your eyes! To be fair, she had just finished warning you about ghosts a few minutes ago.\n\nOne of the camel's pouches is labeled \"maps\" - sure enough, it's full of documents (your puzzle input) about how to navigate the desert.\nAt least, you're pretty sure that's what they are; one of the documents contains a list of left/right instructions, and the rest of the documents seem to describe some kind of network of labeled nodes.\n\nIt seems like you're meant to use the left/right instructions to navigate the network.\nPerhaps if you have the camel follow the same instructions, you can escape the haunted wasteland!\n\nAfter examining the maps for a bit, two nodes stick out: AAA and ZZZ.\nYou feel like AAA is where you are now, and you have to follow the left/right instructions until you reach ZZZ.\n\nThis format defines each node of the network individually.\nFor example:\n\nRL\n\nAAA = (BBB, CCC)\nBBB = (DDD, EEE)\nCCC = (ZZZ, GGG)\nDDD = (DDD, DDD)\nEEE = (EEE, EEE)\nGGG = (GGG, GGG)\nZZZ = (ZZZ, ZZZ)\n\nStarting with AAA, you need to look up the next element based on the next left/right instruction in your input.\nIn this example, start with AAA and go right (R) by choosing the right element of AAA, CCC.\nThen, L means to choose the left element of CCC, ZZZ.\nBy following the left/right instructions, you reach ZZZ in 2 steps.\n\nOf course, you might not find ZZZ right away.\nIf you run out of left/right instructions, repeat the whole sequence of instructions as necessary: RL really means RLRLRLRLRLRLRLRL...\nand so on.\nFor example, here is a situation that takes 6 steps to reach ZZZ:\n\nLLR\n\nAAA = (BBB, BBB)\nBBB = (AAA, ZZZ)\nZZZ = (ZZZ, ZZZ)\n\nStarting at AAA, follow the left/right instructions.\nHow many steps are required to reach ZZZ?",
+        "test_input": "LLR\n\nAAA = (BBB, BBB)\nBBB = (AAA, ZZZ)\nZZZ = (ZZZ, ZZZ)\n",
+        "test_answer": 6,
+        "test_answer_idx": -5,
+        "answer": "12169",
+        "time": 0.00321189989335835
+    },
+    "part_2": {
+        "text": "The sandstorm is upon you and you aren't any closer to escaping the wasteland.\nYou had the camel follow the instructions, but you've barely left your starting position.\nIt's going to take significantly more steps to escape!\n\nWhat if the map isn't for people - what if the map is for ghosts? Are ghosts even bound by the laws of spacetime? Only one way to find out.\n\nAfter examining the maps a bit longer, your attention is drawn to a curious fact: the number of nodes with names ending in A is equal to the number ending in Z! If you were a ghost, you'd probably just start at every node that ends with A and follow all of the paths at the same time until they all simultaneously end up at nodes that end with Z.\n\nFor example:\n\nLR\n\n11A = (11B, XXX)\n11B = (XXX, 11Z)\n11Z = (11B, XXX)\n22A = (22B, XXX)\n22B = (22C, 22C)\n22C = (22Z, 22Z)\n22Z = (22B, 22B)\nXXX = (XXX, XXX)\n\nHere, there are two starting nodes, 11A and 22A (because they both end with A).\nAs you follow each left/right instruction, use that instruction to simultaneously navigate away from both nodes you're currently on.\nRepeat this process until all of the nodes you're currently on end with Z.\n(If only some of the nodes you're on end with Z, they act like any other node and you continue as normal.) In this example, you would proceed as follows:\n\nStep 0: You are at 11A and 22A.\nStep 1: You choose all of the left paths, leading you to 11B and 22B.\nStep 2: You choose all of the right paths, leading you to 11Z and 22C.\nStep 3: You choose all of the left paths, leading you to 11B and 22Z.\nStep 4: You choose all of the right paths, leading you to 11Z and 22B.\nStep 5: You choose all of the left paths, leading you to 11B and 22C.\nStep 6: You choose all of the right paths, leading you to 11Z and 22Z.\n\nSo, in this example, you end up entirely on nodes that end in Z after 6 steps.\n\nSimultaneously start on every node that ends with A.\nHow many steps does it take before you're only on nodes that end with Z?",
+        "test_input": "LR\n\n11A = (11B, XXX)\n11B = (XXX, 11Z)\n11Z = (11B, XXX)\n22A = (22B, XXX)\n22B = (22C, 22C)\n22C = (22Z, 22Z)\n22Z = (22B, 22B)\nXXX = (XXX, XXX)\n",
+        "test_answer": 6,
+        "test_answer_idx": -3,
+        "answer": "12030780859469",
+        "time": 0.04229709994979203
+    }
+}

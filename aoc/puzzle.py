@@ -269,6 +269,7 @@ class Puzzle:
         print()
         part = 1
         test_available, solution_available = self.run_test(part, puzzle_only)
+        _ = self.get_input()
         if solution_available and not test_only:
             self.run_puzzle(part, test_only, text, rerun)
         print()
