@@ -78,4 +78,4 @@ You can initialize a solution directory with the included CLI script:
 python create.py -d 1 -y 2015
 ```
 
-[Advent of Code]: https://adventofcode.com/2022
+[Advent of Code]: https://adventofcode.com
