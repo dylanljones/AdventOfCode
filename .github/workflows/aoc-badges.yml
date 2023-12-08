@@ -14,7 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2                # clones your repo
 
-      - uses: joblo2213/aoc-badges-action@v3
+      - name: Update 2023 Badges
+        uses: joblo2213/aoc-badges-action@v3
         with:
           userid: 2300201                        # your user id, see setup on how to obtain
           session: ${{ secrets.AOC_SESSION }}    # secret containing session code, see setup on how to obtain
@@ -26,7 +27,8 @@ jobs:
 #          dayRegex: '(?<=https:\/\/img\.shields\.io\/badge\/day%20📅-)[0-9]+(?=-blue)'                   # Regular expression that finds the content of the day badge in your file.# Regular expression that finds the content of the stars badge in your file.
 #          daysCompletedRegex: '(?<=https:\/\/img\.shields\.io\/badge\/days%20completed-)[0-9]+(?=-red)'  # Regular expression that finds the content of the days completed badge iun your file.
 
-      - uses: joblo2213/aoc-badges-action@v3
+      - name: Update 2022 Badges
+        uses: joblo2213/aoc-badges-action@v3
         with:
           userid: 2300201
           session: ${{ secrets.AOC_SESSION }}
