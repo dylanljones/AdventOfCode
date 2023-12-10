@@ -1,7 +1,6 @@
 Advent of Code
 =================
 
-[![AoC 2022](https://img.shields.io/badge/⭐_2021-15-yellow)](https://adventofcode.com/2021)
 [![AoC 2022](https://img.shields.io/badge/⭐_2022-48-yellow)](https://adventofcode.com/2022)
 [![AoC 2023](https://img.shields.io/badge/⭐_2023-16-yellow)](https://adventofcode.com/2023)
 

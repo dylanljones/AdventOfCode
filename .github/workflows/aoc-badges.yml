@@ -35,14 +35,6 @@ jobs:
           year: 2022
           starsRegex: '(?<=https:\/\/img\.shields\.io\/badge\/⭐_2022-)[0-9]+(?=-yellow)'
 
-      - name: Update 2021 Badges
-        uses: joblo2213/aoc-badges-action@v3
-        with:
-          userid: 2300201
-          session: ${{ secrets.AOC_SESSION }}
-          year: 2021
-          starsRegex: '(?<=https:\/\/img\.shields\.io\/badge\/⭐_2021-)[0-9]+(?=-yellow)'
-
       - uses: stefanzweifel/git-auto-commit-action@v4     # Step that pushes these local changes back to your github repo
         with:
           commit_message: Update badges
