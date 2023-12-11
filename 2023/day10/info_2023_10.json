@@ -9,13 +9,15 @@
         "test_input": "7-F7-\n.FJ|7\nSJLL7\n|F--J\nLJ.LJ\n",
         "test_answer": null,
         "test_answer_idx": null,
-        "answer": "7086"
+        "answer": "7086",
+        "time": 0.030438399873673916
     },
     "part_2": {
         "text": "You quickly reach the farthest point of the loop, but the animal never emerges.\nMaybe its nest is within the area enclosed by the loop?\n\nTo determine whether it's even worth taking the time to search for such a nest, you should calculate how many tiles are contained within the loop.\nFor example:\n\n...........\n.S-------7.\n.|F-----7|.\n.||.....||.\n.||.....||.\n.|L-7.F-J|.\n.|..|.|..|.\n.L--J.L--J.\n...........\n\nThe above loop encloses merely four tiles - the two pairs of .\nin the southwest and southeast (marked I below).\nThe middle .\ntiles (marked O below) are not in the loop.\nHere is the same loop again with those regions marked:\n\n...........\n.S-------7.\n.|F-----7|.\n.||OOOOO||.\n.||OOOOO||.\n.|L-7OF-J|.\n.|II|O|II|.\n.L--JOL--J.\n.....O.....\n\nIn fact, there doesn't even need to be a full tile path to the outside for tiles to count as outside the loop - squeezing between pipes is also allowed! Here, I is still within the loop and O is still outside the loop:\n\n..........\n.S------7.\n.|F----7|.\n.||OOOO||.\n.||OOOO||.\n.|L-7F-J|.\n.|II||II|.\n.L--JL--J.\n..........\n\nIn both of the above examples, 4 tiles are enclosed by the loop.\n\nHere's a larger example:\n\n.F----7F7F7F7F-7....\n.|F--7||||||||FJ....\n.||.FJ||||||||L7....\nFJL7L7LJLJ||LJ.L-7..\nL--J.L7...LJS7F-7L7.\n....F-J..F7FJ|L7L7L7\n....L7.F7||L7|.L7L7|\n.....|FJLJ|FJ|F7|.LJ\n....FJL-7.||.||||...\n....L---J.LJ.LJLJ...\n\nThe above sketch has many random bits of ground, some of which are in the loop (I) and some of which are outside it (O):\n\nOF----7F7F7F7F-7OOOO\nO|F--7||||||||FJOOOO\nO||OFJ||||||||L7OOOO\nFJL7L7LJLJ||LJIL-7OO\nL--JOL7IIILJS7F-7L7O\nOOOOF-JIIF7FJ|L7L7L7\nOOOOL7IF7||L7|IL7L7|\nOOOOO|FJLJ|FJ|F7|OLJ\nOOOOFJL-7O||O||||OOO\nOOOOL---JOLJOLJLJOOO\n\nIn this larger example, 8 tiles are enclosed by the loop.\n\nAny tile that isn't part of the main loop can count as being enclosed by the loop.\nHere's another example with many bits of junk pipe lying around that aren't connected to the main loop at all:\n\nFF7FSF7F7F7F7F7F---7\nL|LJ||||||||||||F--J\nFL-7LJLJ||||||LJL-77\nF--JF--7||LJLJ7F7FJ-\nL---JF-JLJ.||-FJLJJ7\n|F|F-JF---7F7-L7L|7|\n|FFJF7L7F-JF7|JL---7\n7-L-JL7||F7|L7F-7F7|\nL.L7LFJ|||||FJL7||LJ\nL7JLJL-JLJLJL--JLJ.L\n\nHere are just the tiles that are enclosed by the loop marked with I:\n\nFF7FSF7F7F7F7F7F---7\nL|LJ||||||||||||F--J\nFL-7LJLJ||||||LJL-77\nF--JF--7||LJLJIF7FJ-\nL---JF-JLJIIIIFJLJJ7\n|F|F-JF---7IIIL7L|7|\n|FFJF7L7F-JF7IIL---7\n7-L-JL7||F7|L7F-7F7|\nL.L7LFJ|||||FJL7||LJ\nL7JLJL-JLJLJL--JLJ.L\n\nIn this last example, 10 tiles are enclosed by the loop.\n\nFigure out whether you have time to search for the nest by calculating the area within the loop.\nHow many tiles are enclosed by the loop?",
         "test_input": "FF7FSF7F7F7F7F7F---7\nL|LJ||||||||||||F--J\nFL-7LJLJ||||||LJL-77\nF--JF--7||LJLJ7F7FJ-\nL---JF-JLJ.||-FJLJJ7\n|F|F-JF---7F7-L7L|7|\n|FFJF7L7F-JF7|JL---7\n7-L-JL7||F7|L7F-7F7|\nL.L7LFJ|||||FJL7||LJ\nL7JLJL-JLJLJL--JLJ.L\n",
         "test_answer": 10,
         "test_answer_idx": -1,
-        "answer": "317"
+        "answer": "317",
+        "time": 0.12503520026803017
     }
 }

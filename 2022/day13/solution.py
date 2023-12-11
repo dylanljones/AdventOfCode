@@ -5,7 +5,6 @@
 # Copyright (c) 2022, Dylan Jones
 
 import ast
-import os
 
 import aoc
 
@@ -85,8 +84,8 @@ def parse_packets(data: str):
 
 
 class Solution(aoc.Puzzle):
-    def __init__(self):
-        super().__init__(2022, 13, root=os.path.dirname(__file__))
+    year = 2022
+    day = 13
 
     def solution_1(self, data: str):
         pairs = parse_pairs(data)

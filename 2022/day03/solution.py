@@ -8,8 +8,9 @@ from aoc import Puzzle
 
 
 class Solution(Puzzle):
-    def __init__(self):
-        super().__init__(2022, 3)
+    year = 2022
+    day = 3
+    test_input_idx_2 = None
 
     @staticmethod
     def get_priority(char):

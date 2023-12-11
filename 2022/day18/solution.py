@@ -30,10 +30,8 @@ def parse_data(data: str):
 
 
 class Solution(aoc.Puzzle):
-    file = __file__
-
-    def __init__(self):
-        super().__init__()
+    year = 2022
+    day = 18
 
     @staticmethod
     def surface_area(cubes: list[tuple]):

@@ -4,7 +4,6 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
-import os
 from collections import deque
 
 import numpy as np
@@ -39,10 +38,9 @@ def get_neighbors(hmap, pos):
 
 
 class Solution(aoc.Puzzle):
+    year = 2022
+    day = 12
     test_solution_idx_2 = -2
-
-    def __init__(self):
-        super().__init__(2022, 12, root=os.path.dirname(__file__))
 
     def solution_1(self, data: str):
         hmap, start, end = parse_map(data)
@@ -53,15 +51,15 @@ class Solution(aoc.Puzzle):
         while heap:
             steps, pos = heap.popleft()
 
-            if visited[*pos] == 1:
+            if visited[pos] == 1:
                 continue
-            visited[*pos] = 1
+            visited[pos] = 1
             if pos == end:
                 total_steps = steps
                 break
 
             for neighbor in get_neighbors(hmap, pos):
-                hdiff = hmap[*neighbor] - hmap[*pos]
+                hdiff = hmap[neighbor] - hmap[pos]
                 if hdiff <= 1:
                     heap.append((steps + 1, neighbor))
 
@@ -76,15 +74,15 @@ class Solution(aoc.Puzzle):
         while heap:
             steps, pos = heap.popleft()
 
-            if visited[*pos] == 1:
+            if visited[pos] == 1:
                 continue
-            visited[*pos] = 1
-            if hmap[*pos] == 0:
+            visited[pos] = 1
+            if hmap[pos] == 0:
                 total_steps = steps
                 break
 
             for neighbor in get_neighbors(hmap, pos):
-                hdiff = hmap[*neighbor] - hmap[*pos]
+                hdiff = hmap[neighbor] - hmap[pos]
                 if hdiff >= -1:
                     heap.append((steps + 1, neighbor))
 

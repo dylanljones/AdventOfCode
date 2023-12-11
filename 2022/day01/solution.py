@@ -8,8 +8,8 @@ from aoc.puzzle import Puzzle
 
 
 class Solution(Puzzle):
-    def __init__(self):
-        super().__init__(2022, 1)
+    year = 2022
+    day = 1
 
     def solution_1(self, data: str) -> int:
         blocks = data.split("\n\n")

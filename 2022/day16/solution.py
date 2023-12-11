@@ -25,10 +25,8 @@ def parse_data(data: str):
 
 
 class Solution(aoc.Puzzle):
-    file = __file__
-
-    def __init__(self):
-        super().__init__()
+    year = 2022
+    day = 16
 
     @staticmethod
     def find_path(tunnels, a, b, maxlen=30):

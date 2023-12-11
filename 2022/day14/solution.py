@@ -4,7 +4,6 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
-import os
 
 import aoc
 
@@ -46,11 +45,10 @@ def get_occupied_below(occupied, pos):
 
 
 class Solution(aoc.Puzzle):
+    year = 2022
+    day = 14
     test_solution_idx_1 = -3
     test_solution_idx_2 = -2
-
-    def __init__(self):
-        super().__init__(2022, 14, root=os.path.dirname(__file__))
 
     @staticmethod
     def simulate_sand(occupied, start, ymin=-20):

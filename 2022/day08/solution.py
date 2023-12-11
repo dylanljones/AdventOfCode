@@ -5,7 +5,6 @@
 # Copyright (c) 2022, Dylan Jones
 
 import itertools
-import os
 
 import numpy as np
 
@@ -13,12 +12,10 @@ import aoc
 
 
 class Solution(aoc.Puzzle):
-    test_input_idx = 0
+    year = 2022
+    day = 8
     test_solution_idx_1 = -1
     test_solution_idx_2 = -2
-
-    def __init__(self):
-        super().__init__(2022, 8, root=os.path.dirname(__file__))
 
     def solution_1(self, data: str) -> int:
         trees = np.array([[int(x) for x in list(line)] for line in data.splitlines()])

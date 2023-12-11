@@ -4,7 +4,6 @@
 #
 # Copyright (c) 2022, Dylan Jones
 import math
-import os
 import re
 from dataclasses import dataclass
 from typing import Callable
@@ -79,8 +78,8 @@ def parse_monkeys(data):
 
 
 class Solution(aoc.Puzzle):
-    def __init__(self):
-        super().__init__(2022, 11, root=os.path.dirname(__file__))
+    year = 2022
+    day = 11
 
     def solution_1(self, data: str):
         num_rounds = 20

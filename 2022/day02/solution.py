@@ -8,8 +8,8 @@ from aoc import Puzzle
 
 
 class Solution(Puzzle):
-    def __init__(self):
-        super().__init__(2022, 2)
+    year = 2022
+    day = 2
 
     @staticmethod
     def compute_points(num_op, num_my):

@@ -4,7 +4,6 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
-import os
 import re
 
 import numpy as np
@@ -49,12 +48,11 @@ def in_range(p, limits):
 
 
 class Solution(aoc.Puzzle):
+    year = 2022
+    day = 15
     test_solution_idx_1 = -2
     ROWS = [10, 2000000]
     LIMS = [[0, 20], [0, 4_000_000]]
-
-    def __init__(self):
-        super().__init__(2022, 15, root=os.path.dirname(__file__))
 
     def solution_1(self, data: str):
         positions = parse_data(data)

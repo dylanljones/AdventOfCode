@@ -9,13 +9,15 @@
         "test_input": "....#..\n..###.#\n#...#.#\n.#...##\n#.###..\n##.#.##\n.#..#..\n",
         "test_answer": 110,
         "test_answer_idx": -1,
-        "answer": "3931"
+        "answer": "3931",
+        "time": 0.12752440012991428
     },
     "part_2": {
         "text": "It seems you're on the right track.\nFinish simulating the process and figure out where the Elves need to go.\nHow many rounds did you save them?\n\nIn the example above, the first round where no Elf moved was round 20:\n\n.......#......\n....#......#..\n..#.....#.....\n......#.......\n...#....#.#..#\n#.............\n....#.....#...\n..#.....#.....\n....#.#....#..\n.........#....\n....#......#..\n.......#......\n\nFigure out where the Elves need to go.\nWhat is the number of the first round where no Elf moves?",
         "test_input": "....#..\n..###.#\n#...#.#\n.#...##\n#.###..\n##.#.##\n.#..#..\n",
         "test_answer": 20,
         "test_answer_idx": -2,
-        "answer": "944"
+        "answer": "944",
+        "time": 7.962848499882966
     }
 }

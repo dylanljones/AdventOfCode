@@ -3,20 +3,21 @@
     "easter_eggs": [
         "By \"etc\", you're pretty sure they just mean \"more snacks\"."
     ],
-    "test_input": "1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000\n",
     "test_input_idx": 0,
     "part_1": {
         "text": "Santa's reindeer typically eat regular reindeer food, but they need a lot of magical energy to deliver presents on Christmas.\nFor that, their favorite snack is a special type of star fruit that only grows deep in the jungle.\nThe Elves have brought you on their annual expedition to the grove where the fruit grows.\n\nTo supply enough magical energy, the expedition needs to retrieve a minimum of fifty stars by December 25th.\nAlthough the Elves assure you that the grove has plenty of fruit, you decide to grab any fruit you see along the way, just in case.\n\nCollect stars by solving puzzles.\n Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first.\n Each puzzle grants one star.\nGood luck!\n\nThe jungle must be too overgrown and difficult to navigate in vehicles or access from the air; the Elves' expedition traditionally goes on foot.\nAs your boats approach land, the Elves begin taking inventory of their supplies.\nOne important consideration is food - in particular, the number of Calories each Elf is carrying (your puzzle input).\n\nThe Elves take turns writing down the number of Calories contained by the various meals, snacks, rations, etc.\nthat they've brought with them, one item per line.\nEach Elf separates their own inventory from the previous Elf's inventory (if any) by a blank line.\n\nFor example, suppose the Elves finish writing their items' Calories and end up with the following list:\n\n1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000\n\nThis list represents the Calories of the food carried by five Elves:\n\nThe first Elf is carrying food with 1000, 2000, and 3000 Calories, a total of 6000 Calories.\nThe second Elf is carrying one food item with 4000 Calories.\nThe third Elf is carrying food with 5000 and 6000 Calories, a total of 11000 Calories.\nThe fourth Elf is carrying food with 7000, 8000, and 9000 Calories, a total of 24000 Calories.\nThe fifth Elf is carrying one food item with 10000 Calories.\n\nIn case the Elves get hungry and need extra snacks, they need to know which Elf to ask: they'd like to know how many Calories are being carried by the Elf carrying the most Calories.\nIn the example above, this is 24000 (carried by the fourth Elf).\n\nFind the Elf carrying the most Calories.\nHow many total Calories is that Elf carrying?",
+        "test_input": "1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000\n",
         "test_answer": 24000,
         "test_answer_idx": -1,
         "answer": "69626",
-        "time": 0.00038779999886173755
+        "time": 0.0005027996376156807
     },
     "part_2": {
         "text": "By the time you calculate the answer to the Elves' question, they've already realized that the Elf carrying the most Calories of food might eventually run out of snacks.\n\nTo avoid this unacceptable situation, the Elves would instead like to know the total Calories carried by the top three Elves carrying the most Calories.\nThat way, even if one of those Elves runs out of snacks, they still have two backups.\n\nIn the example above, the top three Elves are the fourth Elf (with 24000 Calories), then the third Elf (with 11000 Calories), then the fifth Elf (with 10000 Calories).\nThe sum of the Calories carried by these three elves is 45000.\n\nFind the top three Elves carrying the most Calories.\nHow many Calories are those Elves carrying in total?",
+        "test_input": "1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000\n",
         "test_answer": 45000,
         "test_answer_idx": -1,
         "answer": "206780",
-        "time": 0.00038609999683103524
+        "time": 0.0006056004203855991
     }
 }

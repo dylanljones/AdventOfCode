@@ -144,7 +144,6 @@ def evaluate(blueprint, prior_states, timelimit=26):
 class Solution(aoc.Puzzle):
     day = 19
     year = 2022
-    test_input_idx_2 = None
 
     def solution_1(self, data: str):
         blueprints = parse_input(data)

@@ -10,7 +10,7 @@ import aoc
 
 
 class Solution(aoc.Puzzle):
-    test_input_idx = 1
+    test_input_idx_1 = 1
 
     def __init__(self):
         super().__init__(2022, 10, root=os.path.dirname(__file__))

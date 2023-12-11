@@ -34,12 +34,11 @@ def dirsize2(files: dict, dirname: str) -> int:
 
 
 class Solution(aoc.Puzzle):
-    test_input_idx = 1
+    year = 2022
+    day = 7
+    test_input_idx_1 = 1
     test_solution_idx_1 = -1
     test_solution_idx_2 = -1
-
-    def __init__(self):
-        super().__init__(2022, 7)
 
     @staticmethod
     def parse_commands(data: str):

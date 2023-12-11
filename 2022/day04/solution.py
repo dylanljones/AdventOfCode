@@ -17,8 +17,8 @@ def parse_ranges(line):
 
 
 class Solution(Puzzle):
-    def __init__(self):
-        super().__init__(2022, 4)
+    year = 2022
+    day = 4
 
     def solution_1(self, data: str):
         lines = data.splitlines(keepends=False)
@@ -38,7 +38,6 @@ class Solution(Puzzle):
         count = 0
         for line in lines:
             range_1, range_2 = parse_ranges(line)
-            print(range_1, range_2)
             if range_2[0] <= range_1[0] <= range_2[1]:
                 count += 1
             elif range_2[0] <= range_1[1] <= range_2[1]:
@@ -47,9 +46,7 @@ class Solution(Puzzle):
                 count += 1
             elif range_1[0] <= range_2[1] <= range_1[1]:
                 count += 1
-
         return count
-        # return count
 
 
 def main():

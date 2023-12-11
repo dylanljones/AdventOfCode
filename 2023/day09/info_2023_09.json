@@ -10,7 +10,7 @@
         "test_answer": 114,
         "test_answer_idx": -1,
         "answer": "1877825184",
-        "time": 0.005990500096231699
+        "time": 0.006178800016641617
     },
     "part_2": {
         "text": "Of course, it would be nice to have even more history included in your report.\nSurely it's safe to just extrapolate backwards as well, right?\n\nFor each history, repeat the process of finding differences until the sequence of differences is entirely zero.\nThen, rather than adding a zero to the end and filling in the next values of each previous sequence, you should instead add a zero to the beginning of your sequence of zeroes, then fill in new first values for each previous sequence.\n\nIn particular, here is what the third example history looks like when extrapolating back in time:\n\n5  10  13  16  21  30  45\n  5   3   3   5   9  15\n   -2   0   2   4   6\n      2   2   2   2\n        0   0   0\n\nAdding the new values on the left side of each sequence from bottom to top eventually reveals the new left-most history value: 5.\n\nDoing this for the remaining example data above results in previous values of -3 for the first history and 0 for the second history.\nAdding all three new values together produces 2.\n\nAnalyze your OASIS report again, this time extrapolating the previous value for each history.\nWhat is the sum of these extrapolated values?",
@@ -18,6 +18,6 @@
         "test_answer": 2,
         "test_answer_idx": -1,
         "answer": "1108",
-        "time": 0.006295700091868639
+        "time": 0.0062339999713003635
     }
 }

@@ -65,8 +65,9 @@ class Rock:
 
 
 class Solution(aoc.Puzzle):
-    file = __file__
-    test_input_idx = 1
+    year = 2022
+    day = 17
+    test_input_idx_1 = 1
     test_solution_idx_2 = -2
 
     def __init__(self):

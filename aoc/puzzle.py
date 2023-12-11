@@ -30,7 +30,7 @@ class Puzzle:
     year = None
 
     test_input_idx_1 = 0
-    test_input_idx_2 = 0
+    test_input_idx_2 = None
     test_input_1 = None
     test_solution_1 = None
     test_solution_idx_1 = -1

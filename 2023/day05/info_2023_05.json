@@ -9,13 +9,15 @@
         "test_input": "seeds: 79 14 55 13\n\nseed-to-soil map:\n50 98 2\n52 50 48\n\nsoil-to-fertilizer map:\n0 15 37\n37 52 2\n39 0 15\n\nfertilizer-to-water map:\n49 53 8\n0 11 42\n42 0 7\n57 7 4\n\nwater-to-light map:\n88 18 7\n18 25 70\n\nlight-to-temperature map:\n45 77 23\n81 45 19\n68 64 13\n\ntemperature-to-humidity map:\n0 69 1\n1 0 69\n\nhumidity-to-location map:\n60 56 37\n56 93 4\n",
         "test_answer": 35,
         "test_answer_idx": -1,
-        "answer": "535088217"
+        "answer": "535088217",
+        "time": 0.00038029998540878296
     },
     "part_2": {
         "text": "Everyone will starve if you only plant such a small number of seeds.\nRe-reading the almanac, it looks like the seeds: line actually describes ranges of seed numbers.\n\nThe values on the initial seeds: line come in pairs.\nWithin each pair, the first value is the start of the range and the second value is the length of the range.\nSo, in the first line of the example above:\n\nseeds: 79 14 55 13\n\nThis line describes two ranges of seed numbers to be planted in the garden.\nThe first range starts with seed number 79 and contains 14 values: 79, 80, ..., 91, 92.\nThe second range starts with seed number 55 and contains 13 values: 55, 56, ..., 66, 67.\n\nNow, rather than considering four seed numbers, you need to consider a total of 27 seed numbers.\n\nIn the above example, the lowest location number can be obtained from seed number 82, which corresponds to soil 84, fertilizer 84, water 84, light 77, temperature 45, humidity 46, and location 46.\nSo, the lowest location number is 46.\n\nConsider all of the initial seed numbers listed in the ranges on the first line of the almanac.\nWhat is the lowest location number that corresponds to any of the initial seed numbers?",
         "test_input": "seeds: 79 14 55 13\n\nseed-to-soil map:\n50 98 2\n52 50 48\n\nsoil-to-fertilizer map:\n0 15 37\n37 52 2\n39 0 15\n\nfertilizer-to-water map:\n49 53 8\n0 11 42\n42 0 7\n57 7 4\n\nwater-to-light map:\n88 18 7\n18 25 70\n\nlight-to-temperature map:\n45 77 23\n81 45 19\n68 64 13\n\ntemperature-to-humidity map:\n0 69 1\n1 0 69\n\nhumidity-to-location map:\n60 56 37\n56 93 4\n",
         "test_answer": 46,
         "test_answer_idx": -1,
-        "answer": "51399228"
+        "answer": "51399228",
+        "time": 0.004812300205230713
     }
 }

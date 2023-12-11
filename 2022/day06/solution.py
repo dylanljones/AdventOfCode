@@ -8,11 +8,10 @@ import aoc
 
 
 class Solution(aoc.Puzzle):
+    year = 2022
+    day = 6
     test_solution_idx_1 = -9
     test_solution_idx_2 = -9
-
-    def __init__(self):
-        super().__init__(2022, 6)
 
     @staticmethod
     def get_unique_section(data: str, n: int):

@@ -174,4 +174,4 @@ class Solution(aoc.Puzzle):
 
 if __name__ == "__main__":
     puzzle = Solution()
-    puzzle.run(rerun=False)
+    puzzle.run()

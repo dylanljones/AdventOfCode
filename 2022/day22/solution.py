@@ -158,10 +158,10 @@ class Solution(aoc.Puzzle):
         for r in range(ny):
             for c in range(nx):
                 i, j = r * side, c * side
-                cube_sides[r, c] = data[i, j]
+                cube_sides[r, c] = int(data[i, j] > 0)
         print(cube_sides)
 
 
 if __name__ == "__main__":
     puzzle = Solution()
-    puzzle.run(test_only=False, rerun=False)
+    puzzle.run(puzzle_only=True, test_only=False, rerun=False)

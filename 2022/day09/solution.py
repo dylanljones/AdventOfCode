@@ -4,7 +4,6 @@
 #
 # Copyright (c) 2022, Dylan Jones
 
-import os
 
 import numpy as np
 
@@ -19,11 +18,10 @@ DIRECTIONS = {
 
 
 class Solution(aoc.Puzzle):
-    test_input_idx = 3
+    year = 2022
+    day = 9
+    test_input_idx_1 = 3
     test_solution_idx_2 = -7
-
-    def __init__(self):
-        super().__init__(2022, 9, root=os.path.dirname(__file__))
 
     @staticmethod
     def solution(data, num_knots):
