@@ -199,8 +199,8 @@ class Client:
         day,
         test_input_idx_1=0,
         test_input_idx_2=0,
-        test_answer_idx_1=-1,
-        test_answer_idx_2=-1,
+        test_solution_idx_1=-1,
+        test_solution_idx_2=-1,
     ):
         url = URL.format(year=year, day=day)
         res = self.session.get(url)
@@ -215,7 +215,7 @@ class Client:
         text1 = get_text(article)
         if test_input_idx_1 is not None:
             test_input = get_test_input(article, test_input_idx_1)
-            test_answer1 = get_test_answer(article, test_answer_idx_1)
+            test_answer1 = get_test_answer(article, test_solution_idx_1)
         else:
             test_input = None
             test_answer1 = None
@@ -244,7 +244,7 @@ class Client:
             else:
                 test_input2 = test_input
             try:
-                test_answer2 = get_test_answer(article, test_answer_idx_2)
+                test_answer2 = get_test_answer(article, test_solution_idx_2)
             except IndexError:
                 test_answer2 = None
             try:
@@ -262,14 +262,14 @@ class Client:
             "text": text1,
             "test_input": test_input,
             "test_answer": test_answer1,
-            "test_answer_idx": test_answer_idx_1,
+            "test_answer_idx": test_solution_idx_1,
             "answer": answer1,
         }
         data["part_2"] = {
             "text": text2,
             "test_input": test_input2,
             "test_answer": test_answer2,
-            "test_answer_idx": test_answer_idx_2,
+            "test_answer_idx": test_solution_idx_2,
             "answer": answer2,
         }
 
