@@ -27,8 +27,8 @@ class Solution(aoc.Puzzle):
     day = 8
     year = 2023
     test_input_idx_1 = -1
-    test_answer_idx_1 = -5
-    test_answer_idx_2 = -3
+    test_solution_idx_1 = -5
+    test_solution_idx_2 = -3
 
     def solution_1(self, data: str):
         instructions, _, next_elements = parse_input(data)

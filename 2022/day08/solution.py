@@ -14,8 +14,8 @@ import aoc
 
 class Solution(aoc.Puzzle):
     test_input_idx = 0
-    test_answer_idx_1 = -1
-    test_answer_idx_2 = -2
+    test_solution_idx_1 = -1
+    test_solution_idx_2 = -2
 
     def __init__(self):
         super().__init__(2022, 8, root=os.path.dirname(__file__))

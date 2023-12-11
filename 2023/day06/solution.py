@@ -21,7 +21,7 @@ def solve_roots_int(t, d):
 class Solution(aoc.Puzzle):
     day = 6
     year = 2023
-    test_answer_idx_1 = -4
+    test_solution_idx_1 = -4
 
     def solution_1(self, data: str):
         lines = [line.strip() for line in data.splitlines(keepends=False)]

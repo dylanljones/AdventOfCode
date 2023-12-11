@@ -96,7 +96,7 @@ def test_decimal_to_snafu():
 class Solution(aoc.Puzzle):
     day = 25
     year = 2022
-    test_answer_idx_1 = -1
+    test_solution_idx_1 = -1
 
     def solution_1(self, data: str):
         test_snafu_to_decimal()

@@ -37,8 +37,8 @@ def solve_monkey(monkeys: dict, name: str) -> float:
 class Solution(aoc.Puzzle):
     day = 21
     year = 2022
-    test_answer_idx_1 = -2
-    test_answer_idx_2 = -4
+    test_solution_idx_1 = -2
+    test_solution_idx_2 = -4
 
     def solution_1(self, data: str):
         monkeys = parse_input(data)

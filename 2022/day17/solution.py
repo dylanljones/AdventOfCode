@@ -67,7 +67,7 @@ class Rock:
 class Solution(aoc.Puzzle):
     file = __file__
     test_input_idx = 1
-    test_answer_idx_2 = -2
+    test_solution_idx_2 = -2
 
     def __init__(self):
         super().__init__()

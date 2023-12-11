@@ -49,7 +49,7 @@ def in_range(p, limits):
 
 
 class Solution(aoc.Puzzle):
-    test_answer_idx_1 = -2
+    test_solution_idx_1 = -2
     ROWS = [10, 2000000]
     LIMS = [[0, 20], [0, 4_000_000]]
 

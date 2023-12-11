@@ -47,7 +47,7 @@ class Solution(aoc.Puzzle):
     day = 11
     year = 2023
     test_input_idx_2 = None
-    test_answer_idx_2 = None
+    test_solution_idx_2 = None
 
     def solution_1(self, data: str):
         size, galaxies = parse_input(data)

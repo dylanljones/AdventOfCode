@@ -33,11 +33,10 @@ class Puzzle:
     test_input_idx_2 = 0
     test_input_1 = None
     test_solution_1 = None
-    test_answer_idx_1 = -1
-    test_answer_idx_2 = -1
+    test_solution_idx_1 = -1
+    test_solution_idx_2 = -1
     test_input_2 = None
     test_solution_2 = None
-    second_test_input = None
 
     def __init__(self, year=-1, day=-1, root="", token="", headers=None):
         if self.file is None:
@@ -126,11 +125,11 @@ class Puzzle:
         if self.test_input_1 is not None:
             self.test_input_idx_1 = None
         if self.test_solution_1 is not None:
-            self.test_answer_idx_1 = None
+            self.test_solution_idx_1 = None
         if self.test_input_2 is not None:
             self.test_input_idx_2 = None
         if self.test_solution_2 is not None:
-            self.test_answer_idx_2 = None
+            self.test_solution_idx_2 = None
         if not reload and os.path.exists(file):
             with open(file, "r") as fh:
                 info = dict(json.load(fh))
@@ -141,8 +140,8 @@ class Puzzle:
             ans_idx2 = info["part_2"].get("test_answer_idx", None)
             if (
                 inp_idx != self.test_input_idx_1
-                or ans_idx1 != self.test_answer_idx_1
-                or ans_idx2 != self.test_answer_idx_2
+                or ans_idx1 != self.test_solution_idx_1
+                or ans_idx2 != self.test_solution_idx_2
             ):
                 load = True
         else:
@@ -154,8 +153,8 @@ class Puzzle:
                 self.day,
                 self.test_input_idx_1,
                 self.test_input_idx_2,
-                self.test_answer_idx_1,
-                self.test_answer_idx_2,
+                self.test_solution_idx_1,
+                self.test_solution_idx_2,
             )
             if self.root and not os.path.exists(self.root):
                 os.makedirs(self.root)
@@ -235,11 +234,11 @@ class Puzzle:
                 data = self.get_input()
                 t0 = time.perf_counter()
                 result = solution_func(data)
+                t = time.perf_counter() - t0
                 if result is None:
                     print("No solution implemented")
                 else:
                     print("Result", result)
-                    t = time.perf_counter() - t0
                     if solution is None:
                         solution = result
                     solution = type(result)(solution)

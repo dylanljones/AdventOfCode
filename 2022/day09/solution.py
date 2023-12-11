@@ -20,7 +20,7 @@ DIRECTIONS = {
 
 class Solution(aoc.Puzzle):
     test_input_idx = 3
-    test_answer_idx_2 = -7
+    test_solution_idx_2 = -7
 
     def __init__(self):
         super().__init__(2022, 9, root=os.path.dirname(__file__))

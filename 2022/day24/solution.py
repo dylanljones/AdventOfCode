@@ -138,7 +138,7 @@ class Solution(aoc.Puzzle):
     day = 24
     year = 2022
     test_input_idx_1 = -2
-    test_answer_idx_1 = -3
+    test_solution_idx_1 = -3
 
     def solution_1(self, data: str):
         start, end, size, blizzards = parse_input(data)

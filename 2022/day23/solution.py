@@ -83,7 +83,7 @@ class Solution(aoc.Puzzle):
     year = 2022
     test_input_idx_1 = -8
     test_input_idx_2 = None
-    test_answer_idx_2 = -2
+    test_solution_idx_2 = -2
 
     def solution_1(self, data: str):
         elves = parse_input(data)
