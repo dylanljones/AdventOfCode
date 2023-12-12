@@ -2,7 +2,7 @@ Advent of Code
 =================
 
 [![AoC 2022](https://img.shields.io/badge/⭐_2022-48-yellow)](https://adventofcode.com/2022)
-[![AoC 2023](https://img.shields.io/badge/⭐_2023-22-yellow)](https://adventofcode.com/2023)
+[![AoC 2023](https://img.shields.io/badge/⭐_2023-24-yellow)](https://adventofcode.com/2023)
 
 
 🎄 My solutions for [Advent of Code]
