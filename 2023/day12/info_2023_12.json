@@ -9,13 +9,15 @@
         "test_input": "???.### 1,1,3\n.??..??...?##. 1,1,3\n?#?#?#?#?#?#?#? 1,3,1,6\n????.#...#... 4,1,1\n????.######..#####. 1,6,5\n?###???????? 3,2,1\n",
         "test_answer": 21,
         "test_answer_idx": -1,
-        "answer": "7169"
+        "answer": "7169",
+        "time": 0.02298730006441474
     },
     "part_2": {
         "text": "As you look out at the field of springs, you feel like there are way more springs than the condition records list.\nWhen you examine the records, you discover that they were actually folded up this whole time!\n\nTo unfold the records, on each row, replace the list of spring conditions with five copies of itself (separated by ?) and replace the list of contiguous groups of damaged springs with five copies of itself (separated by ,).\n\nSo, this row:\n\n.# 1\n\nWould become:\n\n.#?.#?.#?.#?.# 1,1,1,1,1\n\nThe first line of the above example would become:\n\n???.###????.###????.###????.###????.### 1,1,3,1,1,3,1,1,3,1,1,3,1,1,3\n\nIn the above example, after unfolding, the number of possible arrangements for some rows is now much larger:\n\n???.### 1,1,3 - 1 arrangement\n.??..??...?##.\n1,1,3 - 16384 arrangements\n?#?#?#?#?#?#?#? 1,3,1,6 - 1 arrangement\n????.#...#...\n4,1,1 - 16 arrangements\n????.######..#####.\n1,6,5 - 2500 arrangements\n?###???????? 3,2,1 - 506250 arrangements\n\nAfter unfolding, adding all of the possible arrangement counts together produces 525152.\n\nUnfold your condition records; what is the new sum of possible arrangement counts?",
         "test_input": "???.### 1,1,3\n.??..??...?##. 1,1,3\n?#?#?#?#?#?#?#? 1,3,1,6\n????.#...#... 4,1,1\n????.######..#####. 1,6,5\n?###???????? 3,2,1\n",
         "test_answer": 525152,
         "test_answer_idx": -1,
-        "answer": "1738259948652"
+        "answer": "1738259948652",
+        "time": 0.45749889966100454
     }
 }
