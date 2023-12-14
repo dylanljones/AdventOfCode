@@ -6,21 +6,26 @@ import numpy as np
 
 import aoc
 
+EMPTY = 0
+ROUND = 1
+SQUARE = 2
+
 
 def parse_input(data: str):
-    chars = {".": 0, "O": 1, "#": 2}
+    chars = {".": EMPTY, "O": ROUND, "#": SQUARE}
     return np.array([[chars[x] for x in line] for line in data.splitlines()])
 
 
 def tilt_up(arr):
     for row in range(1, arr.shape[0]):
-        cols = np.where(np.logical_and(arr[row, :] == 1, arr[row - 1, :] == 0))[0]
+        candiddates = np.logical_and(arr[row, :] == ROUND, arr[row - 1, :] == EMPTY)
+        cols = np.where(candiddates)[0]
         for col in cols:
             r = row
-            while r > 0 and arr[r - 1, col] == 0:
+            while r > 0 and arr[r - 1, col] == EMPTY:
                 r -= 1
-            arr[r, col] = 1
-            arr[row, col] = 0
+            arr[r, col] = ROUND
+            arr[row, col] = EMPTY
 
 
 def tilt_cycle(arr):
@@ -31,8 +36,8 @@ def tilt_cycle(arr):
         arr[:] = np.rot90(arr, k=-1)
 
 
-def calc_score(arr):
-    return sum(np.sum(arr[r, :] == 1) * (arr.shape[0] - r) for r in range(arr.shape[0]))
+def calc_score(a):
+    return sum(np.sum(a[r, :] == ROUND) * (a.shape[0] - r) for r in range(a.shape[0]))
 
 
 class Solution(aoc.Puzzle):
@@ -54,7 +59,7 @@ class Solution(aoc.Puzzle):
         for i in range(cycles):
             tilt_cycle(arr)
             # Extract positions of round rocks
-            state = tuple(tuple(pos) for pos in np.argwhere(arr == 1))
+            state = tuple(tuple(pos) for pos in np.argwhere(arr == ROUND))
             # Look for a state that has already been seen
             if state in states:
                 start, size = states[state], i - states[state]

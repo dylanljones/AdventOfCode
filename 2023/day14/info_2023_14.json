@@ -10,7 +10,7 @@
         "test_answer": 136,
         "test_answer_idx": -1,
         "answer": "109833",
-        "time": 0.004399399999783782
+        "time": 0.004355600000053528
     },
     "part_2": {
         "text": "The parabolic reflector dish deforms, but not in a way that focuses the beam.\nTo do that, you'll need to move the rocks to the edges of the platform.\nFortunately, a button on the side of the control panel labeled \"spin cycle\" attempts to do just that!\n\nEach cycle tilts the platform four times so that the rounded rocks roll north, then west, then south, then east.\nAfter each tilt, the rounded rocks roll as far as they can before the platform tilts in the next direction.\nAfter one cycle, the platform will have finished rolling the rounded rocks in those four directions in that order.\n\nHere's what happens in the example above after each of the first few cycles:\n\nAfter 1 cycle:\n.....#....\n....#...O#\n...OO##...\n.OO#......\n.....OOO#.\n.O#...O#.#\n....O#....\n......OOOO\n#...O###..\n#..OO#....\n\nAfter 2 cycles:\n.....#....\n....#...O#\n.....##...\n..O#......\n.....OOO#.\n.O#...O#.#\n....O#...O\n.......OOO\n#..OO###..\n#.OOO#...O\n\nAfter 3 cycles:\n.....#....\n....#...O#\n.....##...\n..O#......\n.....OOO#.\n.O#...O#.#\n....O#...O\n.......OOO\n#...O###.O\n#.OOO#...O\n\nThis process should work if you leave it running long enough, but you're still worried about the north support beams.\nTo make sure they'll survive for a while, you need to calculate the total load on the north support beams after 1000000000 cycles.\n\nIn the above example, after 1000000000 cycles, the total load on the north support beams is 64.\n\nRun the spin cycle for 1000000000 cycles.\nAfterward, what is the total load on the north support beams?",
@@ -18,6 +18,6 @@
         "test_answer": 64,
         "test_answer_idx": -2,
         "answer": "99875",
-        "time": 2.4728775000003225
+        "time": 2.6702753999998095
     }
 }
