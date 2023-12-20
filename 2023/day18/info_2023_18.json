@@ -10,14 +10,14 @@
         "test_answer": 62,
         "test_answer_idx": -1,
         "answer": "61661",
-        "time": 0.0024344999983441085
+        "time": 0.018827100007911213
     },
     "part_2": {
         "text": "The Elves were right to be concerned; the planned lagoon would be much too small.\n\nAfter a few minutes, someone realizes what happened; someone swapped the color and instruction parameters when producing the dig plan.\nThey don't have time to fix the bug; one of them asks if you can extract the correct instructions from the hexadecimal codes.\n\nEach hexadecimal code is six hexadecimal digits long.\nThe first five hexadecimal digits encode the distance in meters as a five-digit hexadecimal number.\nThe last hexadecimal digit encodes the direction to dig: 0 means R, 1 means D, 2 means L, and 3 means U.\n\nSo, in the above example, the hexadecimal codes can be converted into the true instructions:\n\n#70c710 = R 461937\n#0dc571 = D 56407\n#5713f0 = R 356671\n#d2c081 = D 863240\n#59c680 = R 367720\n#411b91 = D 266681\n#8ceee2 = L 577262\n#caa173 = U 829975\n#1b58a2 = L 112010\n#caa171 = D 829975\n#7807d2 = L 491645\n#a77fa3 = U 686074\n#015232 = L 5411\n#7a21e3 = U 500254\n\nDigging out this loop and its interior produces a lagoon that can hold an impressive 952408144115 cubic meters of lava.\n\nConvert the hexadecimal color codes into the correct instructions; if the Elves follow this new dig plan, how many cubic meters of lava could the lagoon hold?",
         "test_input": "R 6 (#70c710)\nD 5 (#0dc571)\nL 2 (#5713f0)\nD 2 (#d2c081)\nR 2 (#59c680)\nD 2 (#411b91)\nL 5 (#8ceee2)\nU 2 (#caa173)\nL 1 (#1b58a2)\nU 2 (#caa171)\nR 2 (#7807d2)\nU 3 (#a77fa3)\nL 2 (#015232)\nU 2 (#7a21e3)\n",
         "test_answer": 952408144115,
         "test_answer_idx": -1,
-        "answer": null,
-        "time": 0.002365499996813014
+        "answer": "111131796939729",
+        "time": 0.010992900002747774
     }
 }
