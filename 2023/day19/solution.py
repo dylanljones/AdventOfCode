@@ -2,102 +2,88 @@
 # Author: Dylan Jones
 # Date:   2023-12-19
 
-from dataclasses import dataclass
+import math
+import re
 from operator import gt, lt
-from typing import Callable
 
 import aoc
 
+RE_WORK = re.compile(r"(\w+)\{([^}]+)\}")
+RE_COND = re.compile(r"(\w+)(<|>)(\d+):(\w+)")
+RE_PART = re.compile(r"x=(\d+),m=(\d+),a=(\d+),s=(\d+)")
+
 PARTS = ["x", "m", "a", "s"]
+OPERATORS = {">": gt, "<": lt}
 MIN = 1
 MAX = 4000
 
 
-@dataclass
-class Rule:
-    target: str
-    part: str = None
-    opstr: str = None
-    operator: Callable = None
-    value: int = None
-
-    @property
-    def has_condition(self):
-        return self.part is not None
-
-    def get_target(self, parts: dict) -> str:
-        if self.operator(parts[self.part], self.value):
-            return self.target
-        return ""
-
-    def num_accepted(self, parts: list) -> dict:
-        nums = dict()
-        for part in parts:
-            if self.has_condition:
-                if self.part == part:
-                    if self.opstr == ">":
-                        nums[part] = MAX - self.value
-                    else:
-                        nums[part] = self.value - MIN
-
-            elif self.target == "R":
-                nums[part] = 0
-            else:
-                nums[part] = MAX - MIN + 1
-
-        return nums
-
-
 def parse_input(data: str):
     part1, part2 = data.split("\n\n")
-    rules = dict()
-    for line in part1.splitlines(keepends=False):
-        name, items = line.split("{")
-        name = name.strip()
-        items = items[:-1].split(",")
-        _rules = list()
-        for item in items:
-            if ":" in item:
-                cond, target = item.split(":")
-                opstr = ">" if ">" in cond else "<"
-                op = gt if opstr == ">" else lt
-                part, val = cond.split(opstr)
-                rule = Rule(target, part, opstr, op, int(val))
-            else:
-                rule = Rule(item)
-            _rules.append(rule)
-        rules[name] = _rules
-
+    workflows = dict()
     parts = list()
-    for line in part2.splitlines(keepends=False):
-        line = line.strip()[1:-1]
-        _parts = dict()
-        for item in line.split(","):
-            part, val = item.split("=")
-            _parts[part] = int(val)
-        parts.append(_parts)
-
-    return rules, parts
+    for name, rules in RE_WORK.findall(part1):
+        conditional = RE_COND.findall(rules)
+        final = rules.split(",")[-1]
+        workflows[name] = conditional + [final]
+    for vals in RE_PART.findall(part2):
+        parts.append(dict(zip(PARTS, (int(x) for x in vals))))
+    return workflows, parts
 
 
-def run_workflows(rule_dict, part_dict):
-    workflow = "in"
-    path = [workflow]
-    while True:
-        rules = rule_dict[workflow]
-        for rule in rules:
-            if rule.has_condition:
-                workflow = rule.get_target(part_dict)
+def run_workflows(workflows, parts):
+    accepted = 0
+    for part in parts:
+        curr = "in"
+        while curr not in ("A", "R"):
+            for p, op, val, target in workflows[curr][:-1]:
+                if OPERATORS[op](part[p], int(val)):
+                    curr = target
+                    break
             else:
-                workflow = rule.target
-            if workflow:
+                curr = workflows[curr][-1]
+        if curr == "A":
+            accepted += sum(part.values())
+    return accepted
+
+
+def get_combinations(workflows):
+    start = ("in", {k: (MIN, MAX) for k in PARTS})
+    queue = [start]
+    accepted = 0
+    while queue:
+        curr, intervals = queue.pop()
+        if curr in ("A", "R"):
+            if curr == "A":
+                accepted += math.prod(b - a + 1 for a, b in intervals.values())
+            continue
+        for p, op, val, res in workflows[curr][:-1]:
+            val = int(val)
+
+            a, b = intervals[p]
+            if (op == ">" and val >= b) or (op == "<" and val <= a):
+                continue
+
+            if (op == ">" and val < a) or (op == "<" and val > b):
+                queue.append((res, intervals))
                 break
 
-        path.append(workflow)
-        if workflow == "A":
-            return True
-        elif workflow == "R":
-            return False
+            if op == ">":
+                transfer = (val + 1, b)
+                passthrough = (a, val)
+            else:
+                transfer = (a, val - 1)
+                passthrough = (val, b)
+
+            intervals[p] = passthrough
+            intervals2 = intervals.copy()
+            intervals2[p] = transfer
+            queue.append((res, intervals2))
+
+        else:
+            queue.append((workflows[curr][-1], intervals))
+
+    return accepted
 
 
 class Solution(aoc.Puzzle):
@@ -105,16 +91,14 @@ class Solution(aoc.Puzzle):
     year = 2023
 
     def solution_1(self, data: str):
-        rules, parts = parse_input(data)
-        result = 0
-        for part in parts:
-            accept = run_workflows(rules, part)
-            if accept:
-                result += sum(part.values())
-        return result
+        workflows, parts = parse_input(data)
+        n = run_workflows(workflows, parts)
+        return n
 
     def solution_2(self, data: str):
-        pass
+        workflows, _ = parse_input(data)
+        n = get_combinations(workflows)
+        return n
 
 
 if __name__ == "__main__":

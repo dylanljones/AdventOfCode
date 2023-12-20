@@ -10,13 +10,14 @@
         "test_answer": 19114,
         "test_answer_idx": -1,
         "answer": "287054",
-        "time": 0.0027763089892687276
+        "time": 0.0029598999972222373
     },
     "part_2": {
         "text": "Even with your help, the sorting process still isn't fast enough.\n\nOne of the Elves comes up with a new plan: rather than sort parts individually through all of these workflows, maybe you can figure out in advance which combinations of ratings will be accepted or rejected.\n\nEach of the four ratings (x, m, a, s) can have an integer value ranging from a minimum of 1 to a maximum of 4000.\nOf all possible distinct combinations of ratings, your job is to figure out which ones will be accepted.\n\nIn the above example, there are 167409079868000 distinct combinations of ratings that will be accepted.\n\nConsider only your list of workflows; the list of part ratings that the Elves wanted you to sort is no longer relevant.\nHow many distinct combinations of ratings will be accepted by the Elves' workflows?",
         "test_input": "px{a<2006:qkq,m>2090:A,rfg}\npv{a>1716:R,A}\nlnx{m>1548:A,A}\nrfg{s<537:gd,x>2440:R,A}\nqs{s>3448:A,lnx}\nqkq{x<1416:A,crn}\ncrn{x>2662:A,R}\nin{s<1351:px,qqz}\nqqz{s>2770:qs,m<1801:hdj,R}\ngd{a>3333:R,R}\nhdj{m>838:A,pv}\n\n{x=787,m=2655,a=1222,s=2876}\n{x=1679,m=44,a=2067,s=496}\n{x=2036,m=264,a=79,s=2244}\n{x=2461,m=1339,a=466,s=291}\n{x=2127,m=1623,a=2188,s=1013}\n",
         "test_answer": 167409079868000,
         "test_answer_idx": -1,
-        "answer": null
+        "answer": "131619440296497",
+        "time": 0.0033445000008214265
     }
 }
