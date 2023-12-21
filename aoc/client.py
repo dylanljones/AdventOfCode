@@ -128,6 +128,8 @@ def parse_submit_msg(text):
     match = RE_RIGHT_ANSWER.search(text)
     if match:
         return 0, match[0].strip()
+    elif "Did you already complete it?" in text:
+        return 0, "Already completed"
     else:
         # unexpected output
         raise ValueError(f"Could not parse response message: {text}")

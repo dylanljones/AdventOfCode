@@ -72,6 +72,9 @@ class Puzzle:
 
         self.load_info(reload=False)
 
+        self.is_test = False
+        self.is_puzzle = False
+
     @property
     def url(self):
         return self.client.get_puzzle_url(self.year, self.day)
@@ -196,6 +199,8 @@ class Puzzle:
         return None
 
     def run_test(self, part, puzzle_only):
+        self.is_test = True
+        self.is_puzzle = False
         solution_func = self.solution_1 if part == 1 else self.solution_2
 
         test_data = self.get_test_input(part=part)
@@ -218,9 +223,13 @@ class Puzzle:
                     raise TestAnswerError(test_answer, test_solution)
             else:
                 print("No solution implemented")
+        self.is_test = False
+        self.is_puzzle = False
         return test_available, solution_available
 
     def run_puzzle(self, part, test_only=False, text=False, rerun=True):
+        self.is_test = False
+        self.is_puzzle = True
         solution_func = self.solution_1 if part == 1 else self.solution_2
 
         solution = self.info[f"part_{part}"]["answer"]
@@ -258,6 +267,9 @@ class Puzzle:
         else:
             print(f"Your puzzle answer was   {solution}")
             print(f"Time: {self.info[f'part_{part}'].get('time', 0) * 1000:.4f} ms")
+
+        self.is_test = False
+        self.is_puzzle = False
 
     def run(self, puzzle_only=False, test_only=False, text=False, rerun=True):
         header = f"DAY {self.day:02}: {self.url}"
