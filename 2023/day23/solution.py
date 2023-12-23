@@ -55,8 +55,14 @@ def find_junctions(neighbors, start, end):
     return junctions
 
 
-def junction_neighbors(neighbors, junctions):
+def junction_neighbors(neighbors, start, end):
     """Builds a dictionary of neighbors for each junction"""
+    # Find junctions
+    junctions = {start, end}
+    for pos, nn in neighbors.items():
+        if len(nn) > 2:
+            junctions.add(pos)
+    # Find neighbors for each junction and distance to them
     junc_neighbors = defaultdict(list)
     for p in junctions:
         queue = [p]
@@ -70,10 +76,9 @@ def junction_neighbors(neighbors, junctions):
                     if n not in seen:
                         if n in junctions:
                             junc_neighbors[p].append((n, dist))
-                            seen.add(n)
                         else:
-                            seen.add(n)
                             new_queue.append(n)
+                        seen.add(n)
             queue = new_queue
     return junc_neighbors
 
@@ -95,8 +100,7 @@ def dfs(junc_neighbors, start, end):
 
 def find_longest_path(hike_map, start, end, ignore_slope=False):
     neighbors = build_neighbor_dict(hike_map, ignore_slope=ignore_slope)
-    junctions = find_junctions(neighbors, start, end)
-    junc_neighbors = junction_neighbors(neighbors, junctions)
+    junc_neighbors = junction_neighbors(neighbors, start, end)
     return dfs(junc_neighbors, start, end)
 
 

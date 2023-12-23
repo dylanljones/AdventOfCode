@@ -10,7 +10,7 @@
         "test_answer": 94,
         "test_answer_idx": -6,
         "answer": "2018",
-        "time": 0.024082499992800876
+        "time": 0.02117369999177754
     },
     "part_2": {
         "text": "As you reach the trailhead, you realize that the ground isn't as slippery as you expected; you'll have no problem climbing up the steep slopes.\n\nNow, treat all slopes as if they were normal paths (.).\nYou still want to make sure you have the most scenic hike possible, so continue to ensure that you never step onto the same tile twice.\nWhat is the longest hike you can take?\n\nIn the example above, this increases the longest hike to 154 steps:\n\n#S#####################\n#OOOOOOO#########OOO###\n#######O#########O#O###\n###OOOOO#.>OOO###O#O###\n###O#####.#O#O###O#O###\n###O>...#.#O#OOOOO#OOO#\n###O###.#.#O#########O#\n###OOO#.#.#OOOOOOO#OOO#\n#####O#.#.#######O#O###\n#OOOOO#.#.#OOOOOOO#OOO#\n#O#####.#.#O#########O#\n#O#OOO#...#OOO###...>O#\n#O#O#O#######O###.###O#\n#OOO#O>.#...>O>.#.###O#\n#####O#.#.###O#.#.###O#\n#OOOOO#...#OOO#.#.#OOO#\n#O#########O###.#.#O###\n#OOO###OOO#OOO#...#O###\n###O###O#O###O#####O###\n#OOO#OOO#O#OOO>.#.>O###\n#O###O###O#O###.#.#O###\n#OOOOO###OOO###...#OOO#\n#####################O#\n\nFind the longest hike you can take through the surprisingly dry hiking trails listed on your map.\nHow many steps long is the longest hike?",
@@ -18,6 +18,6 @@
         "test_answer": 154,
         "test_answer_idx": -2,
         "answer": "6406",
-        "time": 30.056076899985783
+        "time": 27.648197800008347
     }
 }
