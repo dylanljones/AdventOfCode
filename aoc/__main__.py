@@ -10,7 +10,7 @@ from pathlib import Path
 TEMPLATE = """\
 # -*- coding: utf-8 -*-
 # Author: Dylan Jones
-# Date:   {year}-12-{day:02d}
+# Date:   {now:%Y-%m-%d}
 
 import aoc
 
@@ -46,7 +46,7 @@ def main():
     path.mkdir(parents=True, exist_ok=True)
 
     file = path / "solution.py"
-    src = TEMPLATE.format(day=day, year=year)
+    src = TEMPLATE.format(day=day, year=year, now=now)
     file.write_text(src)
 
     file = path / "__init__.py"
