@@ -75,7 +75,7 @@ before running the second part.
 
 You can initialize a solution directory with the included CLI script:
 ```bash
-python - aoc -d 1 -y 2015
+python -m aoc -d 1 -y 2015
 ```
 
 [Advent of Code]: https://adventofcode.com
