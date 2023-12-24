@@ -55,6 +55,11 @@ def intersection(s1, s2):
     return x1, y1
 
 
+def cross_matrix(v):
+    """Skew-symmetric matrix for cross product"""
+    return np.array([[0, -v[2], v[1]], [v[2], 0, -v[0]], [-v[1], v[0], 0]])
+
+
 def find_rock_solution(stones, i=0, j=1, k=2):
     r"""Find the solution for the rock to hit all hail stones
 
@@ -74,71 +79,45 @@ def find_rock_solution(stones, i=0, j=1, k=2):
     The total system of equations is then
 
     .. math::
-
         \begin{pmatrix}
-        0             & v_{0z}-v_{1z} & v_{1y}-v_{0y} &       0 & z_1-z_0 & y_0-y_1 \\
-        v_{1z}-v_{0z} &            0  & v_{0x}-v_{1x} & z_0-z_1 &       0 & x_1-x_0 \\
-        v_{0y}-v_{1y} & v_{1x}-v_{0x} &             0 &       0 & y_1-y_0 & x_0-x_1 \\
-                    0 & v_{0z}-v_{2z} & v_{2y}-v_{0y} &       0 & z_2-z_0 & y_0-y_2 \\
-        v_{2z}-v_{0z} &             0 & v_{0x}-v_{2x} & z_0-z_2 &       0 & x_2-x_0 \\
-        v_{0y}-v_{2y} & v_{2x}-v_{0x} &             0 & y_2-y_0 & x_0-x_2 &       0
+            V_{01} & P_{01} \\
+            V_{02} & P_{02}
         \end{pmatrix}
         \begin{pmatrix}
             x \\ y \\ z \\ v_x \\ v_y \\ v_z
         \end{pmatrix}
         =
         \begin{pmatrix}
-            (y_0 v_{0z} - v_{0y} z_0) - (y_1 v_{1z} - v_{1y} z_1) \\
-            (z_0 v_{0x} - v_{0z} x_0) - (z_1 v_{1x} - v_{1z} x_1) \\
-            (x_0 v_{0y} - v_{0x} y_0) - (x_1 v_{1y} - v_{1x} y_1) \\
-            (y_0 v_{0z} - v_{0y} z_0) - (y_2 v_{2z} - v_{2y} z_2) \\
-            (z_0 v_{0x} - v_{0z} x_0) - (z_2 v_{2x} - v_{2z} x_2) \\
-            (x_0 v_{0y} - v_{0x} y_0) - (x_2 v_{2y} - v_{2x} y_2)
+            B_1 \\ B_2
         \end{pmatrix}
+
+    where the blocks $V_{ij}$ and $P_{ij}$ are the skew-symmetric matrices for
+
+    .. math::
+        V_{ij} = v_i - v_j  and P_{ij} = p_i - p_j
+
+    and $B_i$ are the right hand sides of the equations:
+
+    .. math::
+        B_i = -p_0 x v_0 + p_i x v_i
+
     """
-    (x0, y0, z0), (vx0, vy0, vz0) = stones[i]
-    (x1, y1, z1), (vx1, vy1, vz1) = stones[j]
-    (x2, y2, z2), (vx2, vy2, vz2) = stones[k]
+    p1, v1 = stones[i]
+    p2, v2 = stones[j]
+    p3, v3 = stones[k]
+    p1, v1 = np.array(p1), np.array(v1)
+    p2, v2 = np.array(p2), np.array(v2)
+    p3, v3 = np.array(p3), np.array(v3)
 
-    a = np.zeros((6, 6), np.float64)
+    a11 = +cross_matrix(v1) - cross_matrix(v2)
+    a21 = +cross_matrix(v1) - cross_matrix(v3)
+    a12 = -cross_matrix(p1) + cross_matrix(p2)
+    a22 = -cross_matrix(p1) + cross_matrix(p3)
+    a = np.block([[a11, a12], [a21, a22]])
+
     b = np.zeros(6, np.float64)
-
-    a[0, 1] = vz0 - vz1
-    a[0, 2] = vy1 - vy0
-    a[0, 4] = z1 - z0
-    a[0, 5] = y0 - y1
-
-    a[1, 0] = vz1 - vz0
-    a[1, 2] = vx0 - vx1
-    a[1, 3] = z0 - z1
-    a[1, 5] = x1 - x0
-
-    a[2, 0] = vy0 - vy1
-    a[2, 1] = vx1 - vx0
-    a[2, 3] = y1 - y0
-    a[2, 4] = x0 - x1
-
-    a[3, 1] = vz0 - vz2
-    a[3, 2] = vy2 - vy0
-    a[3, 4] = z2 - z0
-    a[3, 5] = y0 - y2
-
-    a[4, 0] = vz2 - vz0
-    a[4, 2] = vx0 - vx2
-    a[4, 3] = z0 - z2
-    a[4, 5] = x2 - x0
-
-    a[5, 0] = vy0 - vy2
-    a[5, 1] = vx2 - vx0
-    a[5, 3] = y2 - y0
-    a[5, 4] = x0 - x2
-
-    b[0] = (y0 * vz0 - vy0 * z0) - (y1 * vz1 - vy1 * z1)
-    b[1] = (z0 * vx0 - vz0 * x0) - (z1 * vx1 - vz1 * x1)
-    b[2] = (x0 * vy0 - vx0 * y0) - (x1 * vy1 - vx1 * y1)
-    b[3] = (y0 * vz0 - vy0 * z0) - (y2 * vz2 - vy2 * z2)
-    b[4] = (z0 * vx0 - vz0 * x0) - (z2 * vx2 - vz2 * x2)
-    b[5] = (x0 * vy0 - vx0 * y0) - (x2 * vy2 - vx2 * y2)
+    b[0:3] = -np.cross(p1, v1) + np.cross(p2, v2)
+    b[3:6] = -np.cross(p1, v1) + np.cross(p3, v3)
 
     vec = la.solve(a, b)
     pos, vel = vec[:3], vec[3:]

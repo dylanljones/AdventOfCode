@@ -10,7 +10,7 @@
         "test_answer": 2,
         "test_answer_idx": -3,
         "answer": "14799",
-        "time": 0.08711099997162819
+        "time": 0.08541449997574091
     },
     "part_2": {
         "text": "Upon further analysis, it doesn't seem like any hailstones will naturally collide.\nIt's up to you to fix that!\n\nYou find a rock on the ground nearby.\nWhile it seems extremely unlikely, if you throw it just right, you should be able to hit every hailstone in a single throw!\n\nYou can use the probably-magical winds to reach any integer position you like and to propel the rock at any integer velocity.\nNow including the Z axis in your calculations, if you throw the rock at time 0, where do you need to be so that the rock perfectly collides with every hailstone? Due to probably-magical inertia, the rock won't slow down or change direction when it collides with a hailstone.\n\nIn the example above, you can achieve this by moving to position 24, 13, 10 and throwing the rock at velocity -3, 1, 2.\nIf you do this, you will hit every hailstone as follows:\n\nHailstone: 19, 13, 30 @ -2, 1, -2\nCollision time: 5\nCollision position: 9, 18, 20\n\nHailstone: 18, 19, 22 @ -1, -1, -2\nCollision time: 3\nCollision position: 15, 16, 16\n\nHailstone: 20, 25, 34 @ -2, -2, -4\nCollision time: 4\nCollision position: 12, 17, 18\n\nHailstone: 12, 31, 28 @ -1, -2, -1\nCollision time: 6\nCollision position: 6, 19, 22\n\nHailstone: 20, 19, 15 @ 1, -5, -3\nCollision time: 1\nCollision position: 21, 14, 12\n\nAbove, each hailstone is identified by its initial position and its velocity.\nThen, the time and position of that hailstone's collision with your rock are given.\n\nAfter 1 nanosecond, the rock has exactly the same position as one of the hailstones, obliterating it into ice dust! Another hailstone is smashed to bits two nanoseconds after that.\nAfter a total of 6 nanoseconds, all of the hailstones have been destroyed.\n\nSo, at time 0, the rock needs to be at X position 24, Y position 13, and Z position 10.\nAdding these three coordinates together produces 47.\n(Don't add any coordinates from the rock's velocity.)\n\nDetermine the exact position and velocity the rock needs to have at time 0 so that it perfectly collides with every hailstone.\nWhat do you get if you add up the X, Y, and Z coordinates of that initial position?",
@@ -18,6 +18,6 @@
         "test_answer": 47,
         "test_answer_idx": -2,
         "answer": "1007148211789625",
-        "time": 0.0010066000104416162
+        "time": 0.000905699998838827
     }
 }
