@@ -47,12 +47,30 @@ def in_range(p, limits):
     return (limits[0] <= p.real <= limits[1]) and (limits[0] <= p.imag <= limits[1])
 
 
+def find_beacon(positions, limits):
+    sensors, beacons = positions.T
+    distances = manhatten(sensors, beacons)
+    for i, (sens, beac) in enumerate(positions):
+        print(f"\rChecking sensor {i+1}/{len(sensors)}", end="", flush=True)
+        dist = distances[i]
+        # Check points one step further away than nearest beacon
+        for p in get_edges(sens, dist + 1):
+            if in_range(p, limits) and p not in beacons:
+                # Check if point is in range of other beacon
+                for j, (sens2, beac2) in enumerate(positions):
+                    dist2 = distances[j]
+                    if manhatten(sens2, p) <= dist2:
+                        break
+                else:
+                    # If it is not, we have found the distress beacon
+                    print(f": Found distress beacon at ({p.real}, {p.imag})!")
+                    return p
+
+
 class Solution(aoc.Puzzle):
     year = 2022
     day = 15
     test_solution_idx_1 = -2
-    ROWS = [10, 2000000]
-    LIMS = [[0, 20], [0, 4_000_000]]
 
     def solution_1(self, data: str):
         positions = parse_data(data)
@@ -60,7 +78,7 @@ class Solution(aoc.Puzzle):
         distances = manhatten(sensors, beacons)
 
         x0 = np.median(sensors.real).astype(int)
-        y = self.ROWS[self.runs_sol1]
+        y = 10 if self.is_test else 2_000_000
 
         checked = list()
         start = complex(int(x0), y)
@@ -87,31 +105,10 @@ class Solution(aoc.Puzzle):
                 count += 1
         return count
 
-    @staticmethod
-    def find_beacon(positions, limits):
-        sensors, beacons = positions.T
-        distances = manhatten(sensors, beacons)
-
-        for i, (sens, beac) in enumerate(positions):
-            print(f"\rChecking sensor {i+1}/{len(sensors)}", end="", flush=True)
-            dist = distances[i]
-            # Check points one step further away than nearest beacon
-            for p in get_edges(sens, dist + 1):
-                if in_range(p, limits) and p not in beacons:
-                    # Check if point is in range of other beacon
-                    for j, (sens2, beac2) in enumerate(positions):
-                        dist2 = distances[j]
-                        if manhatten(sens2, p) <= dist2:
-                            break
-                    else:
-                        # If it is not, we have found the distress beacon
-                        print(f": Found distress beacon at ({p.real}, {p.imag})!")
-                        return p
-
     def solution_2(self, data: str):
         positions = parse_data(data)
-        limits = self.LIMS[self.runs_sol2]
-        p = self.find_beacon(positions, limits)
+        limits = [0, 20] if self.is_test else [0, 4_000_000]
+        p = find_beacon(positions, limits)
         result = int(4_000_000 * p.real + p.imag)
         return result
 
