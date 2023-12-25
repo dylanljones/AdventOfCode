@@ -10,7 +10,7 @@
         "test_answer": 5,
         "test_answer_idx": -1,
         "answer": "495",
-        "time": 0.30673020001268014
+        "time": 0.33249849999992875
     },
     "part_2": {
         "text": "Disintegrating bricks one at a time isn't going to be fast enough.\nWhile it might sound dangerous, what you really need is a chain reaction.\n\nYou'll need to figure out the best brick to disintegrate.\nFor each brick, determine how many other bricks would fall if that brick were disintegrated.\n\nUsing the same example as above:\n\nDisintegrating brick A would cause all 6 other bricks to fall.\nDisintegrating brick F would cause only 1 other brick, G, to fall.\n\nDisintegrating any other brick would cause no other bricks to fall.\nSo, in this example, the sum of the number of other bricks that would fall as a result of disintegrating each brick is 7.\n\nFor each brick, determine how many other bricks would fall if that brick were disintegrated.\nWhat is the sum of the number of other bricks that would fall?",
@@ -18,6 +18,6 @@
         "test_answer": 7,
         "test_answer_idx": -1,
         "answer": "76158",
-        "time": 0.3527124999964144
+        "time": 0.38033720000021276
     }
 }

@@ -10,7 +10,7 @@
         "test_answer": 102,
         "test_answer_idx": -1,
         "answer": "694",
-        "time": 0.3864404000341892
+        "time": 0.32643370000005234
     },
     "part_2": {
         "text": "The crucibles of lava simply aren't large enough to provide an adequate supply of lava to the machine parts factory.\nInstead, the Elves are going to upgrade to ultra crucibles.\n\nUltra crucibles are even more difficult to steer than normal crucibles.\nNot only do they have trouble going in a straight line, but they also have trouble turning!\n\nOnce an ultra crucible starts moving in a direction, it needs to move a minimum of four blocks in that direction before it can turn (or even before it can stop at the end).\nHowever, it will eventually start to get wobbly: an ultra crucible can move a maximum of ten consecutive blocks without turning.\n\nIn the above example, an ultra crucible could follow this path to minimize heat loss:\n\n2>>>>>>>>1323\n32154535v5623\n32552456v4254\n34465858v5452\n45466578v>>>>\n143859879845v\n445787698776v\n363787797965v\n465496798688v\n456467998645v\n122468686556v\n254654888773v\n432267465553v\n\nIn the above example, an ultra crucible would incur the minimum possible heat loss of 94.\n\nHere's another example:\n\n111111111111\n999999999991\n999999999991\n999999999991\n999999999991\n\nSadly, an ultra crucible would need to take an unfortunate path like this one:\n\n1>>>>>>>1111\n9999999v9991\n9999999v9991\n9999999v9991\n9999999v>>>>\n\nThis route causes the ultra crucible to incur the minimum possible heat loss of 71.\n\nDirecting the ultra crucible from the lava pool to the machine parts factory, what is the least heat loss it can incur?",
@@ -18,6 +18,6 @@
         "test_answer": 94,
         "test_answer_idx": -4,
         "answer": "829",
-        "time": 1.1806051999446936
+        "time": 0.9815039999998589
     }
 }

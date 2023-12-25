@@ -10,7 +10,7 @@
         "test_answer": 6440,
         "test_answer_idx": -1,
         "answer": "251029473",
-        "time": 0.01365579990670085
+        "time": 0.012867299999925308
     },
     "part_2": {
         "text": "To make things a little more interesting, the Elf introduces one additional rule.\nNow, J cards are jokers - wildcards that can act like whatever card would make the hand the strongest type possible.\n\nTo balance this, J cards are now the weakest individual cards, weaker even than 2.\nThe other cards stay in the same order: A, K, Q, T, 9, 8, 7, 6, 5, 4, 3, 2, J.\n\nJ cards can pretend to be whatever card is best for the purpose of determining hand type; for example, QJJQ2 is now considered four of a kind.\nHowever, for the purpose of breaking ties between two hands of the same type, J is always treated as J, not the card it's pretending to be: JKKK2 is weaker than QQQQ2 because J is weaker than Q.\n\nNow, the above example goes very differently:\n\n32T3K 765\nT55J5 684\nKK677 28\nKTJJT 220\nQQQJA 483\n\n32T3K is still the only one pair; it doesn't contain any jokers, so its strength doesn't increase.\nKK677 is now the only two pair, making it the second-weakest hand.\nT55J5, KTJJT, and QQQJA are now all four of a kind! T55J5 gets rank 3, QQQJA gets rank 4, and KTJJT gets rank 5.\n\nWith the new joker rule, the total winnings in this example are 5905.\n\nUsing the new joker rule, find the rank of every hand in your set.\nWhat are the new total winnings?",
@@ -18,6 +18,6 @@
         "test_answer": 5905,
         "test_answer_idx": -1,
         "answer": "251003917",
-        "time": 0.01419179979711771
+        "time": 0.013997099999869533
     }
 }

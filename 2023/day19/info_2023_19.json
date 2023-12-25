@@ -10,7 +10,7 @@
         "test_answer": 19114,
         "test_answer_idx": -1,
         "answer": "287054",
-        "time": 0.0029598999972222373
+        "time": 0.0021421000001282664
     },
     "part_2": {
         "text": "Even with your help, the sorting process still isn't fast enough.\n\nOne of the Elves comes up with a new plan: rather than sort parts individually through all of these workflows, maybe you can figure out in advance which combinations of ratings will be accepted or rejected.\n\nEach of the four ratings (x, m, a, s) can have an integer value ranging from a minimum of 1 to a maximum of 4000.\nOf all possible distinct combinations of ratings, your job is to figure out which ones will be accepted.\n\nIn the above example, there are 167409079868000 distinct combinations of ratings that will be accepted.\n\nConsider only your list of workflows; the list of part ratings that the Elves wanted you to sort is no longer relevant.\nHow many distinct combinations of ratings will be accepted by the Elves' workflows?",
@@ -18,6 +18,6 @@
         "test_answer": 167409079868000,
         "test_answer_idx": -1,
         "answer": "131619440296497",
-        "time": 0.0033445000008214265
+        "time": 0.0030982999996922445
     }
 }

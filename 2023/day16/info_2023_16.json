@@ -10,7 +10,7 @@
         "test_answer": 46,
         "test_answer_idx": -1,
         "answer": "6994",
-        "time": 0.012795328046195209
+        "time": 0.0167447999997421
     },
     "part_2": {
         "text": "As you try to work out what might be wrong, the reindeer tugs on your shirt and leads you to a nearby control panel.\nThere, a collection of buttons lets you align the contraption so that the beam enters from any edge tile and heading away from that edge.\n(You can choose either of two directions for the beam if it starts on a corner; for instance, if the beam starts in the bottom-right corner, it can start heading either left or upward.)\n\nSo, the beam could start on any tile in the top row (heading downward), any tile in the bottom row (heading upward), any tile in the leftmost column (heading right), or any tile in the rightmost column (heading left).\nTo produce lava, you need to find the configuration that energizes as many tiles as possible.\n\nIn the above example, this can be achieved by starting the beam in the fourth tile from the left in the top row:\n\n.|<2<\\....\n|v-v\\^....\n.v.v.|->>>\n.v.v.v^.|.\n.v.v.v^...\n.v.v.v^..\\\n.v.v/2\\\\..\n<-2-/vv|..\n.|<<<2-|.\\\n.v//.|.v..\n\nUsing this configuration, 51 tiles are energized:\n\n.#####....\n.#.#.#....\n.#.#.#####\n.#.#.##...\n.#.#.##...\n.#.#.##...\n.#.#####..\n########..\n.#######..\n.#...#.#..\n\nFind the initial beam configuration that energizes the largest number of tiles; how many tiles are energized in that configuration?",
@@ -18,6 +18,6 @@
         "test_answer": 51,
         "test_answer_idx": -2,
         "answer": "7488",
-        "time": 3.2400529899750836
+        "time": 4.245680999999877
     }
 }

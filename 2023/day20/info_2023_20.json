@@ -10,7 +10,7 @@
         "test_answer": 32000000,
         "test_answer_idx": -6,
         "answer": "883726240",
-        "time": 0.058592800007318147
+        "time": 0.056178600000293955
     },
     "part_2": {
         "text": "The final machine responsible for moving the sand down to Island Island has a module attached named rx.\nThe machine turns on when a single low pulse is sent to rx.\n\nReset all modules to their default states.\nWaiting for all pulses to be fully handled after each button press, what is the fewest number of button presses required to deliver a single low pulse to the module named rx?",
@@ -18,6 +18,6 @@
         "test_answer": "rx",
         "test_answer_idx": -1,
         "answer": "211712400442661",
-        "time": 0.217571000001044
+        "time": 0.21191359999966153
     }
 }

@@ -10,7 +10,7 @@
         "test_answer": 142,
         "test_answer_idx": -1,
         "answer": "55834",
-        "time": 0.0015354002825915813
+        "time": 0.001629400000183523
     },
     "part_2": {
         "text": "Your calculation isn't quite right.\nIt looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid \"digits\".\n\nEquipped with this new information, you now need to find the real first and last digit on each line.\nFor example:\n\ntwo1nine\neightwothree\nabcone2threexyz\nxtwone3four\n4nineeightseven2\nzoneight234\n7pqrstsixteen\n\nIn this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76.\nAdding these together produces 281.\n\nWhat is the sum of all of the calibration values?",
@@ -18,6 +18,6 @@
         "test_answer": 281,
         "test_answer_idx": -1,
         "answer": "53221",
-        "time": 0.04590150015428662
+        "time": 0.04360210000004372
     }
 }

@@ -10,7 +10,7 @@
         "test_answer": 374,
         "test_answer_idx": -1,
         "answer": "9693756",
-        "time": 0.036540400236845016
+        "time": 0.034009900000000926
     },
     "part_2": {
         "text": "The galaxies are much older (and thus much farther apart) than the researcher initially estimated.\n\nNow, instead of the expansion you did before, make each empty row or column one million times larger.\nThat is, each empty row should be replaced with 1000000 empty rows, and each empty column should be replaced with 1000000 empty columns.\n\n(In the example above, if each empty row or column were merely 10 times larger, the sum of the shortest paths between every pair of galaxies would be 1030.\nIf each empty row or column were merely 100 times larger, the sum of the shortest paths between every pair of galaxies would be 8410.\nHowever, your universe will need to expand far beyond these values.)\n\nStarting with the same initial image, expand the universe according to these new rules, then find the length of the shortest path between every pair of galaxies.\nWhat is the sum of these lengths?",
@@ -18,6 +18,6 @@
         "test_answer": null,
         "test_answer_idx": null,
         "answer": "717878258016",
-        "time": 0.04363780003041029
+        "time": 0.03912309999986974
     }
 }
