@@ -1,0 +1,23 @@
+{
+    "title": "Day 2: Dive!",
+    "easter_eggs": [
+        "Tank, I need a pilot program for a B212 helicopter."
+    ],
+    "test_input_idx": 0,
+    "part_1": {
+        "text": "Now, you need to figure out how to pilot this thing.\n\nIt seems like the submarine can take a series of commands like forward 1, down 2, or up 3:\n\nforward X increases the horizontal position by X units.\ndown X increases the depth by X units.\nup X decreases the depth by X units.\n\nNote that since you're on a submarine, down and up affect your depth, and so they have the opposite result of what you might expect.\n\nThe submarine seems to already have a planned course (your puzzle input).\nYou should probably figure out where it's going.\nFor example:\n\nforward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2\n\nYour horizontal position and depth both start at 0.\nThe steps above would then modify them as follows:\n\nforward 5 adds 5 to your horizontal position, a total of 5.\ndown 5 adds 5 to your depth, resulting in a value of 5.\nforward 8 adds 8 to your horizontal position, a total of 13.\nup 3 decreases your depth by 3, resulting in a value of 2.\ndown 8 adds 8 to your depth, resulting in a value of 10.\nforward 2 adds 2 to your horizontal position, a total of 15.\n\nAfter following these instructions, you would have a horizontal position of 15 and a depth of 10.\n(Multiplying these together produces 150.)\n\nCalculate the horizontal position and depth you would have after following the planned course.\nWhat do you get if you multiply your final horizontal position by your final depth?",
+        "test_input": "forward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2\n",
+        "test_answer": 150,
+        "test_answer_idx": -1,
+        "answer": "1989265",
+        "time": 0.00042650000023058965
+    },
+    "part_2": {
+        "text": "Based on your calculations, the planned course doesn't seem to make any sense.\nYou find the submarine manual and discover that the process is actually slightly more complicated.\n\nIn addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0.\nThe commands also mean something entirely different than you first thought:\n\ndown X increases your aim by X units.\nup X decreases your aim by X units.\nforward X does two things:\nIt increases your horizontal position by X units.\nIt increases your depth by your aim multiplied by X.\n\nAgain note that since you're on a submarine, down and up do the opposite of what you might expect: \"down\" means aiming in the positive direction.\n\nNow, the above example does something different:\n\nforward 5 adds 5 to your horizontal position, a total of 5.\nBecause your aim is 0, your depth does not change.\ndown 5 adds 5 to your aim, resulting in a value of 5.\nforward 8 adds 8 to your horizontal position, a total of 13.\nBecause your aim is 5, your depth increases by 8*5=40.\nup 3 decreases your aim by 3, resulting in a value of 2.\ndown 8 adds 8 to your aim, resulting in a value of 10.\nforward 2 adds 2 to your horizontal position, a total of 15.\n Because your aim is 10, your depth increases by 2*10=20 to a total of 60.\n\nAfter following these new instructions, you would have a horizontal position of 15 and a depth of 60.\n(Multiplying these produces 900.)\n\nUsing this new interpretation of the commands, calculate the horizontal position and depth you would have after following the planned course.\nWhat do you get if you multiply your final horizontal position by your final depth?",
+        "test_input": "forward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2\n",
+        "test_answer": 900,
+        "test_answer_idx": -1,
+        "answer": "2089174012",
+        "time": 0.0005538999998861982
+    }
+}
