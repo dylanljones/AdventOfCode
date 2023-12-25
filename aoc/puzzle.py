@@ -38,6 +38,8 @@ class Puzzle:
     test_input_2 = None
     test_solution_2 = None
 
+    part_2 = True
+
     def __init__(self, year=-1, day=-1, root="", token="", headers=None):
         if self.file is None:
             m = importlib.import_module(self.__module__)
@@ -284,7 +286,8 @@ class Puzzle:
         if solution_available and not test_only:
             self.run_puzzle(part, test_only, text, rerun)
         print()
-
+        if not self.part_2:
+            return
         print("[Part 2]")
         print()
         part = 2

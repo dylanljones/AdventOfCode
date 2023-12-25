@@ -2,5 +2,6 @@
 requests
 bs4
 numpy
-networkx
+scipy
 matplotlib
+networkx
