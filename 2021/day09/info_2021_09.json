@@ -1,0 +1,23 @@
+{
+    "title": "Day 9: Smoke Basin",
+    "easter_eggs": [
+        "This was originally going to be a puzzle about watersheds, but we're already under water."
+    ],
+    "test_input_idx": 0,
+    "part_1": {
+        "text": "These caves seem to be lava tubes.\nParts are even still volcanically active; small hydrothermal vents release smoke into the caves that slowly settles like rain.\n\nIf you can model how the smoke flows through the caves, you might be able to avoid it and be that much safer.\nThe submarine generates a heightmap of the floor of the nearby caves for you (your puzzle input).\n\nSmoke flows to the lowest point of the area it's in.\nFor example, consider the following heightmap:\n\n2199943210\n3987894921\n9856789892\n8767896789\n9899965678\n\nEach number corresponds to the height of a particular location, where 9 is the highest and 0 is the lowest a location can be.\n\nYour first goal is to find the low points - the locations that are lower than any of its adjacent locations.\nMost locations have four adjacent locations (up, down, left, and right); locations on the edge or corner of the map have three or two adjacent locations, respectively.\n(Diagonal locations do not count as adjacent.)\n\nIn the above example, there are four low points, all highlighted: two are in the first row (a 1 and a 0), one is in the third row (a 5), and one is in the bottom row (also a 5).\nAll other locations on the heightmap have some lower adjacent location, and so are not low points.\n\nThe risk level of a low point is 1 plus its height.\nIn the above example, the risk levels of the low points are 2, 1, 6, and 6.\nThe sum of the risk levels of all low points in the heightmap is therefore 15.\n\nFind all of the low points on your heightmap.\nWhat is the sum of the risk levels of all low points on your heightmap?",
+        "test_input": "2199943210\n3987894921\n9856789892\n8767896789\n9899965678\n",
+        "test_answer": 15,
+        "test_answer_idx": -1,
+        "answer": "506",
+        "time": 0.014068999999835796
+    },
+    "part_2": {
+        "text": "Next, you need to find the largest basins so you know what areas are most important to avoid.\n\nA basin is all locations that eventually flow downward to a single low point.\nTherefore, every low point has a basin, although some basins are very small.\nLocations of height 9 do not count as being in any basin, and all other locations will always be part of exactly one basin.\n\nThe size of a basin is the number of locations within the basin, including the low point.\nThe example above has four basins.\n\nThe top-left basin, size 3:\n\n2199943210\n3987894921\n9856789892\n8767896789\n9899965678\n\nThe top-right basin, size 9:\n\n2199943210\n3987894921\n9856789892\n8767896789\n9899965678\n\nThe middle basin, size 14:\n\n2199943210\n3987894921\n9856789892\n8767896789\n9899965678\n\nThe bottom-right basin, size 9:\n\n2199943210\n3987894921\n9856789892\n8767896789\n9899965678\n\nFind the three largest basins and multiply their sizes together.\nIn the above example, this is 9 * 14 * 9 = 1134.\n\nWhat do you get if you multiply together the sizes of the three largest basins?",
+        "test_input": "2199943210\n3987894921\n9856789892\n8767896789\n9899965678\n",
+        "test_answer": 1134,
+        "test_answer_idx": -1,
+        "answer": "931200",
+        "time": 0.06893089999994118
+    }
+}
