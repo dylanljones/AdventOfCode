@@ -6,65 +6,151 @@
 
 import re
 
-import numpy as np
-
 import aoc
 
 RE_LINE = re.compile(
     r"Sensor at x=(.*?), y=(.*?): closest beacon is at x=(.*?), y=(.*?)$"
 )
 
+Point = tuple[int, int]
 
-def parse_data(data: str):
-    rows = list()
+
+def manhattan(a: Point, b: Point) -> int:
+    """Return the Manhattan distance"""
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+
+class Sensor:
+    """A sensor has its center position and its exclusion range"""
+
+    def __init__(self, pos: Point, beacon: Point) -> None:
+        self.position: Point = pos
+        self.beacon: Point = beacon
+        self.range: int = manhattan(beacon, self.position)
+
+    def in_range(self, point: Point) -> bool:
+        """Check if point is int the sensor's exclusion range"""
+        return manhattan(self.position, point) <= self.range
+
+
+def parse_input(data: str) -> list[Sensor]:
+    sensors = list()
     for line in data.splitlines():
         match = RE_LINE.match(line)
-        sensor = complex(int(match[1]), int(match[2]))
-        beacon = complex(int(match[3]), int(match[4]))
-        rows.append((sensor, beacon))
-    return np.array(rows)
+        pos = int(match[1]), int(match[2])
+        beacon = int(match[3]), int(match[4])
+        sensors.append(Sensor(pos, beacon))
+    return sensors
 
 
-def manhatten(pos1: complex, pos2: complex):
-    diff = pos1 - pos2
-    return np.abs(diff.real) + np.abs(diff.imag)
+def range_overlap(a: Point, b: Point) -> bool:
+    a_in_b = b[0] <= a[0] <= b[1] or b[0] <= a[0] <= b[1]
+    b_in_a = a[0] <= b[0] <= a[1] or a[0] <= b[0] <= a[1]
+    return a_in_b or b_in_a
 
 
-def get_edges(pos, distance):
-    top_y = (pos + 1j * (distance + 0)).imag
-    bot_y = (pos - 1j * (distance + 0)).imag
-    x = pos.real
-    yield pos - distance
-    yield pos + distance
-    for i in range(int(distance)):
-        yield complex(x + i, top_y - i)
-        yield complex(x - i, top_y - i)
-        yield complex(x + i, bot_y + i)
-        yield complex(x - i, bot_y + i)
+def add_range(ranges: list[Point], x0: int, x1: int) -> list[Point]:
+    new_ranges = list()
+    additional = list()
+    for a, b in ranges:
+        if range_overlap((a, b), (x0, x1)):
+            additional.append((min(a, x0), max(b, x1)))
+        else:
+            new_ranges.append((a, b))
+    if len(additional):
+        mins = min(map(lambda tup: tup[0], additional))
+        maxe = max(map(lambda tup: tup[1], additional))
+        new_ranges.append((mins, maxe))
+    else:
+        new_ranges.append((x0, x1))
+    return new_ranges
 
 
-def in_range(p, limits):
-    return (limits[0] <= p.real <= limits[1]) and (limits[0] <= p.imag <= limits[1])
+def remove_range(ranges: list[Point], x: int) -> list[Point]:
+    new_ranges = list()
+    for a, b in ranges:
+        if a < x < b:
+            new_ranges.append((a, x - 1))
+            new_ranges.append((x + 1, b))
+        elif x == a:
+            new_ranges.append((x + 1, b))
+        elif x == b:
+            new_ranges.append((a, x - 1))
+        else:
+            new_ranges.append((a, b))
+    return new_ranges
 
 
-def find_beacon(positions, limits):
-    sensors, beacons = positions.T
-    distances = manhatten(sensors, beacons)
-    for i, (sens, beac) in enumerate(positions):
-        print(f"\rChecking sensor {i+1}/{len(sensors)}", end="", flush=True)
-        dist = distances[i]
-        # Check points one step further away than nearest beacon
-        for p in get_edges(sens, dist + 1):
-            if in_range(p, limits) and p not in beacons:
-                # Check if point is in range of other beacon
-                for j, (sens2, beac2) in enumerate(positions):
-                    dist2 = distances[j]
-                    if manhatten(sens2, p) <= dist2:
-                        break
-                else:
-                    # If it is not, we have found the distress beacon
-                    print(f": Found distress beacon at ({p.real}, {p.imag})!")
-                    return p
+def get_unavailable(sensors: list[Sensor], y: int) -> list[Point]:
+    ranges = list()
+    occupied = list()
+    for sensor in sensors:
+        distance = sensor.range - abs(y - sensor.position[1])
+        if distance <= 0:
+            continue
+
+        if sensor.beacon[1] == y:
+            occupied.append(sensor.beacon[0])
+        if sensor.position[1] == y:
+            occupied.append(sensor.position[0])
+
+        x0 = sensor.position[0] - distance
+        x1 = sensor.position[0] + distance
+        ranges = add_range(ranges, x0, x1)
+
+    for pos in occupied:
+        ranges = remove_range(ranges, pos)
+
+    return ranges
+
+
+def is_free(sensors: list[Sensor], point: Point) -> bool:
+    """Check if point is outside the exclusion range of all sensors"""
+    for sensor in sensors:
+        if sensor.in_range(point):
+            return False
+    return True
+
+
+def find_beacon(sensors: list[Sensor], ymax: int) -> Point:
+    # Calculate all of the lines that pass along the confines of each sensor's
+    # exclusion zone. A line is defined as y=mx+q where m is either 1 or -1.
+    lines = dict()
+    for sensor in sensors:
+        top_asc = True, sensor.position[1] - sensor.range - 1 - sensor.position[0]
+        top_des = False, sensor.position[1] - sensor.range - 1 + sensor.position[0]
+        bot_asc = True, sensor.position[1] + sensor.range + 1 - sensor.position[0]
+        bot_des = False, sensor.position[1] + sensor.range + 1 + sensor.position[0]
+        for line in [top_asc, top_des, bot_asc, bot_des]:
+            # Number of occurrences of each line
+            if line in lines:
+                lines[line] += 1
+            else:
+                lines[line] = 1
+
+    # Only keep the lines that appear at least two times.
+    # A single free spot lies where 4 lines intersect (2 rising and 2 descending)
+    asc_lines, des_lines = list(), list()
+    for line, count in lines.items():
+        if count > 1:
+            if line[0]:
+                des_lines.append(line[1])
+            else:
+                asc_lines.append(line[1])
+    # Calculate the intersections between all the rising and descending lines
+    points = list()
+    for asc_q in asc_lines:
+        for des_q in des_lines:
+            x = (asc_q - des_q) // 2
+            y = x + des_q
+            points.append((x, y))
+
+    # Check which of the intersections is the free point
+    for p in points:
+        if 0 <= p[1] <= ymax and 0 <= p[0] <= ymax and is_free(sensors, p):
+            return p
+
+    raise ValueError("No beacon found")
 
 
 class Solution(aoc.Puzzle):
@@ -73,49 +159,23 @@ class Solution(aoc.Puzzle):
     test_solution_idx_1 = -2
 
     def solution_1(self, data: str):
-        positions = parse_data(data)
-        sensors, beacons = positions.T
-        distances = manhatten(sensors, beacons)
-
-        x0 = np.median(sensors.real).astype(int)
         y = 10 if self.is_test else 2_000_000
-
-        checked = list()
-        start = complex(int(x0), y)
+        sensors = parse_input(data)
         count = 0
-        if np.any(manhatten(sensors, start) <= distances) and start not in beacons:
-            count += 1
-            checked.append(start)
-
-        max_dist = np.max(distances)
-        step = 0
-        while True:
-            step += 1
-            p1 = start - step
-            p2 = start + step
-            dists_p1 = manhatten(sensors, p1)  # Distances from point 1 to sensors
-            dists_p2 = manhatten(sensors, p2)  # Distances from point 2 to sensors
-            # Stop if points are far away enough
-            if np.min(dists_p1) > max_dist and np.min(dists_p2) > max_dist:
-                break
-            # Add points if it is in the radius of any sensor
-            if np.any(dists_p1 <= distances) and p1 not in beacons:
-                count += 1
-            if np.any(dists_p2 <= distances) and p2 not in beacons:
-                count += 1
+        for a, b in get_unavailable(sensors, y):
+            count += b - a + 1
         return count
 
     def solution_2(self, data: str):
-        positions = parse_data(data)
-        limits = [0, 20] if self.is_test else [0, 4_000_000]
-        p = find_beacon(positions, limits)
-        result = int(4_000_000 * p.real + p.imag)
-        return result
+        ymax = 20 if self.is_test else 4_000_000
+        sensors = parse_input(data)
+        p = find_beacon(sensors, ymax)
+        return int(4_000_000 * p[0] + p[1])
 
 
 def main():
     puzzle = Solution()
-    puzzle.run()
+    puzzle.run(puzzle_only=False)
 
 
 if __name__ == "__main__":

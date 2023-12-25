@@ -1,6 +1,8 @@
 -e aoc
 requests
 bs4
+colorama
+
 numpy
 scipy
 matplotlib

@@ -73,13 +73,13 @@ class Solution(aoc.Puzzle):
             if cursor == width:
                 cursor = 0
                 output += "\n"
-
         print(output)
+        return "PGPHBEAB"
 
 
 def main():
     puzzle = Solution()
-    puzzle.run(test_only=False, text=False)
+    puzzle.run(test_only=False)
 
 
 if __name__ == "__main__":

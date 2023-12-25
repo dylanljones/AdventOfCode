@@ -9,7 +9,12 @@ import json
 import os
 import time
 
+import colorama
+from colorama import Fore
+
 from .client import AOCException, Client
+
+colorama.init()
 
 
 class TestAnswerError(AOCException):
@@ -220,11 +225,14 @@ class Puzzle:
                 solution_available = False
             if solution_available:
                 self.runs[part] += 1
-                print(f"Your test answer was     {test_answer}")
+                s = f"Your test answer was     {test_answer}"
                 if not test_answer == test_solution:
+                    print(s)
                     raise TestAnswerError(test_answer, test_solution)
+                else:
+                    print(f"{Fore.GREEN}{s}{Fore.RESET}")
             else:
-                print("No solution implemented")
+                print(f"{Fore.RED}No solution implemented{Fore.RESET}")
         self.is_test = False
         self.is_puzzle = False
         return test_available, solution_available
@@ -247,7 +255,7 @@ class Puzzle:
                 result = solution_func(data)
                 t = time.perf_counter() - t0
                 if result is None:
-                    print("No solution implemented")
+                    print(f"{Fore.RED}No solution implemented{Fore.RESET}")
                 else:
                     print("Result", result)
                     if solution is None:
@@ -262,9 +270,10 @@ class Puzzle:
                         err, msg = self.submit(part, solution)
                         if err:
                             raise ValueError(msg)
-                        print(f"\033[32m{msg}\033[m")
+                        print(f"{Fore.GREEN}{msg}{Fore.RESET}")
                         self.load_info(reload=True)
-                    print(f"Your puzzle answer was   {solution}")
+                    s = f"Your puzzle answer was   {solution}"
+                    print(f"{Fore.GREEN}{s}{Fore.RESET}")
                     print(f"Time: {t * 1000:.4f} ms")
         else:
             print(f"Your puzzle answer was   {solution}")

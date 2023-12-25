@@ -97,6 +97,7 @@ class Solution(aoc.Puzzle):
     day = 25
     year = 2022
     test_solution_idx_1 = -1
+    part_2 = False
 
     def solution_1(self, data: str):
         test_snafu_to_decimal()
@@ -104,10 +105,6 @@ class Solution(aoc.Puzzle):
         sum_decimal = sum(convert_snafu_to_decimal(snafu) for snafu in lines)
         sum_snafu = convert_decimal_to_snafu(sum_decimal)
         return sum_snafu
-
-    def solution_2(self, data: str):
-        # lines = [line.strip() for line in data.splitlines(keepends=False)]
-        pass
 
 
 if __name__ == "__main__":
