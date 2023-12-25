@@ -1,8 +1,6 @@
-# coding: utf-8
-#
-# This code is part of aoc2022.
-#
-# Copyright (c) 2022, Dylan Jones
+# -*- coding: utf-8 -*-
+# Author: Dylan Jones
+# Date:   2023-12-25
 
 import numpy as np
 
