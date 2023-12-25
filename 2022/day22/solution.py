@@ -1,113 +1,107 @@
 # -*- coding: utf-8 -*-
 # Author: Dylan Jones
-# Date:   2022-12-22
+# Date:   2023-12-08
+import cmath
+import re
 
 import numpy as np
 
 import aoc
 
-
-def parse_path(line):
-    steps = list()
-    path = list(line)
-    while path:
-        chars = ""
-        while path and path[0].isdigit():
-            chars += path.pop(0)
-        steps.append(int(chars))
-        while path and path[0].isalpha():
-            steps.append(path.pop(0))
-    return steps
+EMTPY = 0
+OPEN = 1
+WALL = 2
+TILES = {" ": EMTPY, ".": OPEN, "#": WALL}
+DIRS = {"R": -1j, "L": 1j}
+RE_CMD = re.compile(r"(\d+)([R|L])?")
 
 
 def parse_input(data: str):
-    lines = [line for line in data.splitlines(keepends=False)]
-    while lines[-1] == "":
-        lines.pop(-1)
-    steps = parse_path(lines.pop(-1))
-    while lines[-1] == "":
-        lines.pop(-1)
-    return lines, steps
+    data, cmds = data.split("\n\n")
+    cmds = [(int(d), DIRS.get(r, 1)) for d, r in RE_CMD.findall(cmds)]
+    data = data.split("\n")
+    width = max(map(len, data))
+    grid = np.array([[TILES[x] for x in list(f"{line:<{width}}")] for line in data])
+    grid = np.pad(grid, 1, mode="constant", constant_values=0)
+    return grid, cmds
 
 
-class Board:
-    def __init__(self, tiles):
-        self.tiles = tiles
-
-    def get_tiles(self, r=None, c=None):
-        for tile in self.tiles:
-            if r is not None and tile[0] != r:
-                continue
-            if c is not None and tile[1] != c:
-                continue
-            yield tile
-
-    def get_tile(self, r, c):
-        for tile in self.get_tiles(r=r, c=c):
-            return tile[2]
-
-    def start_position(self):
-        cols = list(tile[1] for tile in self.get_tiles(r=0) if tile[2] == ".")
-        c = min(cols)
-        return 0, c
+def move(grid, trans, z, dz, dist):
+    for _ in range(dist):
+        nz = z + dz
+        ndz = dz
+        if (nz, dz) in trans:
+            nz, ndz = trans[(nz, dz)]
+        if grid[int(nz.real), int(nz.imag)] == WALL:
+            break
+        z, dz = nz, ndz
+    return z, dz
 
 
-class Player:
-    def __init__(self, pos, facing):
-        self.pos = np.array(pos)
-        self.facing = facing
-        self.direction = np.array([0, 0])
-        self.update_direction()
+def periodic_trans(grid):
+    """Periodic transformation"""
+    n, m = grid.shape
+    trans = dict()
+    top = np.argmax(grid != EMTPY, axis=0) + 1j * np.arange(m)
+    bottom = n - 1 - np.argmax(grid[::-1] != EMTPY, axis=0) + 1j * np.arange(m)
+    left = np.argmax(grid != EMTPY, axis=1) * 1j + np.arange(n)
+    right = (m - 1 - np.argmax(grid[:, ::-1] != EMTPY, axis=1)) * 1j + np.arange(n)
+    for to, bo in zip(top, bottom):
+        trans[(to - 1, -1 + 0j)] = bo, -1 + 0j
+        trans[(bo + 1, 1 + 0j)] = to, 1 + 0j
+    for le, ri in zip(left, right):
+        trans[(le - 1j, -1j)] = ri, -1j
+        trans[(ri + 1j, 1j)] = le, 1j
+    return trans
 
-    def __repr__(self):
-        return f"Player(pos={self.pos}, facing={self.facing})"
 
-    def move(self, board, steps):
-        pos = self.pos
-        if self.facing in [0, 0.5]:
-            tiles_in_dir = list(board.get_tiles(r=pos[0]))
+def cube_trans(grid):
+    """Transformation for surface on cube"""
+    at_forward_up = (-1, -1, -1), (0, 1, 0), (0, 0, 1)
+    side = int(np.sqrt(np.sum(grid != EMTPY) / 6))
+    z, dz = 1j * np.argmax(grid[1] != EMTPY), 1j
+    corners, trans = dict(), dict()
+    for _ in range(14):
+        at, forward, up = np.array(at_forward_up)
+        zs = z + np.arange(side) * dz
+        key = tuple(at), tuple(at + 2 * forward)
+        if key in corners:
+            zs0, dz0 = corners[key]
+            for z0, z1 in zip(zs0[::-1], zs):
+                trans[(z0, dz0 * 1j)] = z1 - dz * 1j, dz / 1j
+                trans[(z1, dz * 1j)] = z0 - dz0 * 1j, dz0 / 1j
         else:
-            tiles_in_dir = list(board.get_tiles(c=pos[1]))
-        for i in range(steps):
-            new_pos = pos + self.direction
-            tile = board.get_tile(*new_pos)
-            if tile is None:
-                # Wrap position
-                if self.facing == 0.0:
-                    new_pos[1] = min(tile[1] for tile in tiles_in_dir)
-                elif self.facing == 0.5:
-                    new_pos[1] = max(tile[1] for tile in tiles_in_dir)
-                elif self.facing == 0.25:
-                    new_pos[0] = min(tile[0] for tile in tiles_in_dir)
-                elif self.facing == 0.75:
-                    new_pos[0] = max(tile[0] for tile in tiles_in_dir)
-            tile = board.get_tile(*new_pos)
-            if tile == "#":
-                break
-            pos = new_pos
-        self.pos = pos
+            corners[key[::-1]] = zs, dz
 
-    def update_direction(self):
-        if self.facing == 0:
-            self.direction = np.array([0, +1])
-        elif self.facing == 0.25:
-            self.direction = np.array([+1, 0])
-        elif self.facing == 0.5:
-            self.direction = np.array([0, -1])
-        elif self.facing == 0.75:
-            self.direction = np.array([-1, 0])
+        i = z + (side - 1j) * dz
+        turn_right = grid[int(i.real), int(i.imag)] == EMTPY
+        i = z + side * dz
+        go_forward = grid[int(i.real), int(i.imag)] == EMTPY
+        at += 2 * forward
+        if turn_right:
+            forward = np.cross(forward, up)
+            z += (side - 1j) * dz
+            dz *= -1j
+        elif go_forward:
+            s = at @ up
+            forward, up = -s * up, s * forward
+            z += side * dz
         else:
-            raise ValueError(f"Invalid facing: {self.facing}")
+            up = np.cross(forward, up)
+            forward = -forward
+            z += (side - 1) * dz
+            dz *= 1j
+        at_forward_up = at, forward, up
+    return trans
 
-    def turn(self, direction):
-        direction = direction.lower()
-        if direction == "l":
-            self.facing = (self.facing - 0.25) % 1.0
-        elif direction == "r":
-            self.facing = (self.facing + 0.25) % 1.0
-        else:
-            raise ValueError(f"Invalid direction: {direction}")
-        self.update_direction()
+
+def walk_path(grid, cmds, trans):
+    z, dz = 1 + 1j * np.argmax(grid[1] != EMTPY), 1j
+    for step, rot in cmds:
+        z, dz = move(grid, trans, z, dz, step)
+        dz *= rot
+    face = int(1 - 2 * cmath.phase(dz) / np.pi) % 4
+    return z.real, z.imag, face
 
 
 class Solution(aoc.Puzzle):
@@ -116,52 +110,16 @@ class Solution(aoc.Puzzle):
     test_input_idx_2 = None
 
     def solution_1(self, data: str):
-        lines, path = parse_input(data)
-        tiles = list()
-        for r, line in enumerate(lines):
-            for c, char in enumerate(line):
-                if char != " ":
-                    tiles.append((r, c, char))
-        board = Board(tiles)
-        start = board.start_position()
-        player = Player(start, 0)
-        for step in path:
-            if isinstance(step, int):
-                player.move(board, step)
-            else:
-                player.turn(step)
-
-        r, c = player.pos
-        angle = player.facing * 4
-        result = 1000 * (r + 1) + 4 * (c + 1) + angle
-        return result
+        grid, cmds = parse_input(data)
+        r, c, f = walk_path(grid, cmds, periodic_trans(grid))
+        return int(1000 * r + 4 * c + f)
 
     def solution_2(self, data: str):
-        lines, path = parse_input(data)
-        nrows = len(lines)
-        ncols = 0
-        for line in lines:
-            ncols = max(len(line), ncols)
-        data = np.zeros((nrows, ncols), dtype=np.int8)
-        for r, line in enumerate(lines):
-            for c, char in enumerate(line):
-                if char == ".":
-                    data[r, c] = 1
-                elif char == "#":
-                    data[r, c] = 2
-        n = len(np.where(data != 0)[0])
-        side = int(np.sqrt(n / 6))
-
-        ny = nrows // side
-        nx = ncols // side
-        cube_sides = np.zeros((ny, nx))
-        for r in range(ny):
-            for c in range(nx):
-                i, j = r * side, c * side
-                cube_sides[r, c] = int(data[i, j] > 0)
-        print(cube_sides)
+        grid, cmds = parse_input(data)
+        r, c, f = walk_path(grid, cmds, cube_trans(grid))
+        return int(1000 * r + 4 * c + f)
 
 
 if __name__ == "__main__":
     puzzle = Solution()
-    puzzle.run(puzzle_only=True, test_only=False, rerun=False)
+    puzzle.run()

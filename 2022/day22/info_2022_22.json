@@ -10,13 +10,14 @@
         "test_answer": 6032,
         "test_answer_idx": -1,
         "answer": "75388",
-        "time": 0.3762711000163108
+        "time": 0.01647550001507625
     },
     "part_2": {
         "text": "As you reach the force field, you think you hear some Elves in the distance.\nPerhaps they've already arrived?\n\nYou approach the strange input device, but it isn't quite what the monkeys drew in their notes.\nInstead, you are met with a large cube; each of its six faces is a square of 50x50 tiles.\n\nTo be fair, the monkeys' map does have six 50x50 regions on it.\nIf you were to carefully fold the map, you should be able to shape it into a cube!\n\nIn the example above, the six (smaller, 4x4) faces of the cube are:\n\n1111\n        1111\n        1111\n        1111\n222233334444\n222233334444\n222233334444\n222233334444\n        55556666\n        55556666\n        55556666\n        55556666\n\nYou still start in the same position and with the same facing as before, but the wrapping rules are different.\nNow, if you would walk off the board, you instead proceed around the cube.\nFrom the perspective of the map, this can look a little strange.\nIn the above example, if you are at A and move to the right, you would arrive at B facing down; if you are at C and move down, you would arrive at D facing up:\n\n...#\n        .#..\n        #...\n        ....\n...#.......#\n........#..A\n..#....#....\n.D........#.\n        ...#..B.\n        .....#..\n        .#......\n        ..C...#.\n\nWalls still block your path, even if they are on a different face of the cube.\nIf you are at E facing up, your movement is blocked by the wall marked by the arrow:\n\n...#\n        .#..\n     -->#...\n        ....\n...#..E....#\n........#...\n..#....#....\n..........#.\n        ...#....\n        .....#..\n        .#......\n        ......#.\n\nUsing the same method of drawing the last facing you had with an arrow on each tile you visit, the full path taken by the above example now looks like this:\n\n>>v#    \n        .#v.\n   \n        #.v.\n   \n        ..v.\n   \n...#..^...v#    \n.>>>>>^.#.>>    \n.^#....#....\n   \n.^........#.\n   \n        ...#..v.\n        .....#v.\n        .#v<<<<.\n        ..v...#.\n\nThe final password is still calculated from your final position and facing from the perspective of the map.\nIn this example, the final row is 5, the final column is 7, and the final facing is 3, so the final password is 1000 * 5 + 4 * 7 + 3 = 5031.\n\nFold the map into a cube, then follow the path given in the monkeys' notes.\nWhat is the final password?",
         "test_input": "        ...#\n        .#..\n        #...\n        ....\n...#.......#\n........#...\n..#....#....\n..........#.\n        ...#....\n        .....#..\n        .#......\n        ......#.\n\n10R5L5R10L4R5L5\n",
         "test_answer": 5031,
         "test_answer_idx": -1,
-        "answer": null
+        "answer": "182170",
+        "time": 0.01702349999686703
     }
 }
