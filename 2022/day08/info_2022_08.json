@@ -10,7 +10,7 @@
         "test_answer": 21,
         "test_answer_idx": -1,
         "answer": "1829",
-        "time": 0.007569899782538414
+        "time": 0.008324700000230223
     },
     "part_2": {
         "text": "Content with the amount of tree cover available, the Elves just need to know the best spot to build their tree house: they would like to be able to see a lot of trees.\n\nTo measure the viewing distance from a given tree, look up, down, left, and right from that tree; stop if you reach an edge or at the first tree that is the same height or taller than the tree under consideration.\n(If a tree is right on the edge, at least one of its viewing distances will be zero.)\n\nThe Elves don't care about distant trees taller than those found by the rules above; the proposed tree house has large eaves to keep it dry, so they wouldn't be able to see higher than the tree house anyway.\n\nIn the example above, consider the middle 5 in the second row:\n\n30373\n25512\n65332\n33549\n35390\n\nLooking up, its view is not blocked; it can see 1 tree (of height 3).\nLooking left, its view is blocked immediately; it can see only 1 tree (of height 5, right next to it).\nLooking right, its view is not blocked; it can see 2 trees.\nLooking down, its view is blocked eventually; it can see 2 trees (one of height 3, then the tree of height 5 that blocks its view).\n\nA tree's scenic score is found by multiplying together its viewing distance in each of the four directions.\nFor this tree, this is 4 (found by multiplying 1 * 1 * 2 * 2).\n\nHowever, you can do even better: consider the tree of height 5 in the middle of the fourth row:\n\n30373\n25512\n65332\n33549\n35390\n\nLooking up, its view is blocked at 2 trees (by another tree with a height of 5).\nLooking left, its view is not blocked; it can see 2 trees.\nLooking down, its view is also not blocked; it can see 1 tree.\nLooking right, its view is blocked at 2 trees (by a massive tree of height 9).\n\nThis tree's scenic score is 8 (2 * 2 * 1 * 2); this is the ideal spot for the tree house.\n\nConsider each tree on your map.\nWhat is the highest scenic score possible for any tree?",
@@ -18,6 +18,6 @@
         "test_answer": 8,
         "test_answer_idx": -2,
         "answer": "291840",
-        "time": 0.08258690033107996
+        "time": 0.10253030003514141
     }
 }

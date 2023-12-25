@@ -10,7 +10,7 @@
         "test_answer": 31,
         "test_answer_idx": -1,
         "answer": "412",
-        "time": 0.029800900258123875
+        "time": 0.03250390000175685
     },
     "part_2": {
         "text": "As you walk up the hill, you suspect that the Elves will want to turn this into a hiking trail.\nThe beginning isn't very scenic, though; perhaps you can find a better starting point.\n\nTo maximize exercise while hiking, the trail should start as low as possible: elevation a.\nThe goal is still the square marked E.\nHowever, the trail should still be direct, taking the fewest steps to reach its goal.\nSo, you'll need to find the shortest path from any square at elevation a to the square marked E.\n\nAgain consider the example from above:\n\nSabqponm\nabcryxxl\naccszExk\nacctuvwj\nabdefghi\n\nNow, there are six choices for starting position (five marked a, plus the square marked S that counts as being at elevation a).\nIf you start at the bottom-left square, you can reach the goal most quickly:\n\n...v<<<<\n...vv<<^\n...v>E^^\n.>v>>>^^\n>^>>>>>^\n\nThis path reaches the goal in only 29 steps, the fewest possible.\n\nWhat is the fewest steps required to move starting from any square with elevation a to the location that should get the best signal?",
@@ -18,6 +18,6 @@
         "test_answer": 29,
         "test_answer_idx": -2,
         "answer": "402",
-        "time": 0.021722900215536356
+        "time": 0.02143109997268766
     }
 }

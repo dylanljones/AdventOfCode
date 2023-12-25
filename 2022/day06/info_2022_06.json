@@ -10,7 +10,7 @@
         "test_answer": 7,
         "test_answer_idx": -9,
         "answer": "1655",
-        "time": 0.000708600040525198
+        "time": 0.0008248999947682023
     },
     "part_2": {
         "text": "Your device's communication system is correctly detecting packets, but still isn't working.\nIt looks like it also needs to look for messages.\n\nA start-of-message marker is just like a start-of-packet marker, except it consists of 14 distinct characters rather than 4.\n\nHere are the first positions of start-of-message markers for all of the above examples:\n\nmjqjpqmgbljsphdztnvjfqwrcgsmlb: first marker after character 19\nbvwbjplbgvbhsrlpgdmjqwftvncz: first marker after character 23\nnppdvjthqldpwncqszvftbrmjlhg: first marker after character 23\nnznrnfrfntjfmvfwmzdfjlvtqnbhcprsg: first marker after character 29\nzcfzfwzzqfrljwzlrfnpqdbhtmscgvjw: first marker after character 26\n\nHow many characters need to be processed before the first start-of-message marker is detected?",
@@ -18,6 +18,6 @@
         "test_answer": 19,
         "test_answer_idx": -9,
         "answer": "2665",
-        "time": 0.001811500173062086
+        "time": 0.0018668000120669603
     }
 }

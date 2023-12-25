@@ -10,7 +10,7 @@
         "test_answer": 64,
         "test_answer_idx": -1,
         "answer": "3498",
-        "time": 0.005466800183057785
+        "time": 0.005297900002915412
     },
     "part_2": {
         "text": "Something seems off about your calculation.\nThe cooling rate depends on exterior surface area, but your calculation also included the surface area of air pockets trapped in the lava droplet.\n\nInstead, consider only cube sides that could be reached by the water and steam as the lava droplet tumbles into the pond.\nThe steam will expand to reach as much as possible, completely displacing any air on the outside of the lava droplet but never expanding diagonally.\n\nIn the larger example above, exactly one cube of air is trapped within the lava droplet (at 2,2,5), so the exterior surface area of the lava droplet is 58.\n\nWhat is the exterior surface area of your scanned lava droplet?",
@@ -18,6 +18,6 @@
         "test_answer": 58,
         "test_answer_idx": -1,
         "answer": "2008",
-        "time": 0.028604099992662668
+        "time": 0.027966300025582314
     }
 }

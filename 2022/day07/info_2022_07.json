@@ -10,7 +10,7 @@
         "test_answer": 95437,
         "test_answer_idx": -1,
         "answer": "1845346",
-        "time": 0.008325899951159954
+        "time": 0.008502400014549494
     },
     "part_2": {
         "text": "Now, you're ready to choose a directory to delete.\n\nThe total disk space available to the filesystem is 70000000.\nTo run the update, you need unused space of at least 30000000.\nYou need to find a directory you can delete that will free up enough space to run the update.\n\nIn the example above, the total size of the outermost directory (and thus the total amount of used space) is 48381165; this means that the size of the unused space must currently be 21618835, which isn't quite the 30000000 required by the update.\nTherefore, the update still requires a directory with total size of at least 8381165 to be deleted before it can run.\n\nTo achieve this, you have the following options:\n\nDelete directory e, which would increase unused space by 584.\nDelete directory a, which would increase unused space by 94853.\nDelete directory d, which would increase unused space by 24933642.\nDelete directory /, which would increase unused space by 48381165.\n\nDirectories e and a are both too small; deleting them would not free up enough space.\nHowever, directories d and / are both big enough! Between these, choose the smallest: d, increasing unused space by 24933642.\n\nFind the smallest directory that, if deleted, would free up enough space on the filesystem to run the update.\nWhat is the total size of that directory?",
@@ -18,6 +18,6 @@
         "test_answer": 24933642,
         "test_answer_idx": -1,
         "answer": "3636703",
-        "time": 0.012226299848407507
+        "time": 0.012996300007216632
     }
 }

@@ -10,7 +10,7 @@
         "test_answer": 24,
         "test_answer_idx": -3,
         "answer": "1330",
-        "time": 11.125561499968171
+        "time": 11.036090900015552
     },
     "part_2": {
         "text": "You realize you misread the scan.\nThere isn't an endless void at the bottom of the scan - there's floor, and you're standing on it!\n\nYou don't have time to scan the floor, so assume the floor is an infinite horizontal line with a y coordinate equal to two plus the highest y coordinate of any point in your scan.\n\nIn the example above, the highest y coordinate of any point is 9, and so the floor is at y=11.\n(This is as if your scan contained one extra rock path like -infinity,11 -> infinity,11.) With the added floor, the example above now looks like this:\n\n...........+........\n        ....................\n        ....................\n        ....................\n        .........#...##.....\n        .........#...#......\n        .......###...#......\n        .............#......\n        .............#......\n        .....#########......\n        ....................\n<-- etc #################### etc -->\n\nTo find somewhere safe to stand, you'll need to simulate falling sand until a unit of sand comes to rest at 500,0, blocking the source entirely and stopping the flow of sand into the cave.\nIn the example above, the situation finally looks like this after 93 units of sand come to rest:\n\n............o............\n...........ooo...........\n..........ooooo..........\n.........ooooooo.........\n........oo#ooo##o........\n.......ooo#ooo#ooo.......\n......oo###ooo#oooo......\n.....oooo.oooo#ooooo.....\n....oooooooooo#oooooo....\n...ooo#########ooooooo...\n..ooooo.......ooooooooo..\n#########################\n\nUsing your scan, simulate the falling sand until the source of the sand becomes blocked.\nHow many units of sand come to rest?",
@@ -18,6 +18,6 @@
         "test_answer": 93,
         "test_answer_idx": -2,
         "answer": "26139",
-        "time": 0.9465306997299194
+        "time": 0.9260803000070155
     }
 }

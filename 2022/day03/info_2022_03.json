@@ -10,7 +10,7 @@
         "test_answer": 157,
         "test_answer_idx": -1,
         "answer": "7903",
-        "time": 0.0006756000220775604
+        "time": 0.0006350000039674342
     },
     "part_2": {
         "text": "As you finish identifying the misplaced items, the Elves come to you with another issue.\n\nFor safety, the Elves are divided into groups of three.\nEvery Elf carries a badge that identifies their group.\nFor efficiency, within each group of three Elves, the badge is the only item type carried by all three Elves.\nThat is, if a group's badge is item type B, then all three Elves will have item type B somewhere in their rucksack, and at most two of the Elves will be carrying any other item type.\n\nThe problem is that someone forgot to put this year's updated authenticity sticker on the badges.\nAll of the badges need to be pulled out of the rucksacks so the new authenticity stickers can be attached.\n\nAdditionally, nobody wrote down which item type corresponds to each group's badges.\nThe only way to tell which item type is the right one is by finding the one item type that is common between all three Elves in each group.\n\nEvery set of three lines in your list corresponds to a single group, but each group can have a different badge item type.\nSo, in the above example, the first group's rucksacks are the first three lines:\n\nvJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg\n\nAnd the second group's rucksacks are the next three lines:\n\nwMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\nttgJtRGJQctTZtZT\nCrZsJsPPZsGzwwsLwLmpwMDw\n\nIn the first group, the only item type that appears in all three rucksacks is lowercase r; this must be their badges.\nIn the second group, their badge item type must be Z.\n\nPriorities for these items must still be found to organize the sticker attachment efforts: here, they are 18 (r) for the first group and 52 (Z) for the second group.\nThe sum of these is 70.\n\nFind the item type that corresponds to the badges of each three-Elf group.\nWhat is the sum of the priorities of those item types?",
@@ -18,6 +18,6 @@
         "test_answer": 70,
         "test_answer_idx": -1,
         "answer": "2548",
-        "time": 0.0005588997155427933
+        "time": 0.0006256999913603067
     }
 }

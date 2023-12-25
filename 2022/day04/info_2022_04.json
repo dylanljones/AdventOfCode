@@ -10,7 +10,7 @@
         "test_answer": 2,
         "test_answer_idx": -1,
         "answer": "582",
-        "time": 0.0015188995748758316
+        "time": 0.0013841000036336482
     },
     "part_2": {
         "text": "It seems like there is still quite a bit of duplicate work planned.\nInstead, the Elves would like to know the number of pairs that overlap at all.\n\nIn the above example, the first two pairs (2-4,6-8 and 2-3,4-5) don't overlap, while the remaining four pairs (5-7,7-9, 2-8,3-7, 6-6,4-6, and 2-6,4-8) do overlap:\n\n5-7,7-9 overlaps in a single section, 7.\n2-8,3-7 overlaps all of the sections 3 through 7.\n6-6,4-6 overlaps in a single section, 6.\n2-6,4-8 overlaps in sections 4, 5, and 6.\n\nSo, in this example, the number of overlapping assignment pairs is 4.\n\nIn how many assignment pairs do the ranges overlap?",
@@ -18,6 +18,6 @@
         "test_answer": 4,
         "test_answer_idx": -1,
         "answer": "893",
-        "time": 0.00134680001065135
+        "time": 0.001332299958448857
     }
 }

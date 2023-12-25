@@ -10,7 +10,7 @@
         "test_answer": 152,
         "test_answer_idx": -2,
         "answer": "87457751482938",
-        "time": 0.012149900197982788
+        "time": 0.011132600018754601
     },
     "part_2": {
         "text": "Due to some kind of monkey-elephant-human mistranslation, you seem to have misunderstood a few key details about the riddle.\n\nFirst, you got the wrong job for the monkey named root; specifically, you got the wrong math operation.\nThe correct operation for monkey root should be =, which means that it still listens for two numbers (from the same two monkeys as before), but now checks that the two numbers match.\n\nSecond, you got the wrong monkey for the job starting with humn:.\nIt isn't a monkey - it's you.\nActually, you got the job wrong, too: you need to figure out what number you need to yell so that root's equality check passes.\n(The number that appears after humn: in your input is now irrelevant.)\n\nIn the above example, the number you need to yell to pass root's equality test is 301.\n(This causes root to get the same number, 150, from both of its monkeys.)\n\nWhat number do you yell to pass root's equality test?",
@@ -18,6 +18,6 @@
         "test_answer": 301,
         "test_answer_idx": -4,
         "answer": "3221245824363",
-        "time": 3.010536900255829
+        "time": 2.7486973000341095
     }
 }

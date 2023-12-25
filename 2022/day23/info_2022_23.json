@@ -10,7 +10,7 @@
         "test_answer": 110,
         "test_answer_idx": -1,
         "answer": "3931",
-        "time": 0.12752440012991428
+        "time": 0.11086150002665818
     },
     "part_2": {
         "text": "It seems you're on the right track.\nFinish simulating the process and figure out where the Elves need to go.\nHow many rounds did you save them?\n\nIn the example above, the first round where no Elf moved was round 20:\n\n.......#......\n....#......#..\n..#.....#.....\n......#.......\n...#....#.#..#\n#.............\n....#.....#...\n..#.....#.....\n....#.#....#..\n.........#....\n....#......#..\n.......#......\n\nFigure out where the Elves need to go.\nWhat is the number of the first round where no Elf moves?",
@@ -18,6 +18,6 @@
         "test_answer": 20,
         "test_answer_idx": -2,
         "answer": "944",
-        "time": 7.962848499882966
+        "time": 7.125197399989702
     }
 }

@@ -10,7 +10,7 @@
         "test_answer": 13,
         "test_answer_idx": -1,
         "answer": "5852",
-        "time": 0.01771150017157197
+        "time": 0.01822680002078414
     },
     "part_2": {
         "text": "Now, you just need to put all of the packets in the right order.\nDisregard the blank lines in your list of received packets.\n\nThe distress signal protocol also requires that you include two additional divider packets:\n\n[[2]]\n[[6]]\n\nUsing the same rules as before, organize all packets - the ones in your list of received packets as well as the two divider packets - into the correct order.\n\nFor the example above, the result of putting the packets in the correct order is:\n\n[]\n[[]]\n[[[]]]\n[1,1,3,1,1]\n[1,1,5,1,1]\n[[1],[2,3,4]]\n[1,[2,[3,[4,[5,6,0]]]],8,9]\n[1,[2,[3,[4,[5,6,7]]]],8,9]\n[[1],4]\n[[2]]\n[3]\n[[4,4],4,4]\n[[4,4],4,4,4]\n[[6]]\n[7,7,7]\n[7,7,7,7]\n[[8,7,6]]\n[9]\n\nAfterward, locate the divider packets.\nTo find the decoder key for this distress signal, you need to determine the indices of the two divider packets and multiply them together.\n(The first packet is at index 1, the second packet is at index 2, and so on.) In this example, the divider packets are 10th and 14th, and so the decoder key is 140.\n\nOrganize all of the packets into the correct order.\nWhat is the decoder key for the distress signal?",
@@ -18,6 +18,6 @@
         "test_answer": 140,
         "test_answer_idx": -1,
         "answer": "24190",
-        "time": 0.023705100174993277
+        "time": 0.022885099984705448
     }
 }

@@ -10,7 +10,7 @@
         "test_answer": 3068,
         "test_answer_idx": -1,
         "answer": "3144",
-        "time": 0.11494289990514517
+        "time": 0.10449340002378449
     },
     "part_2": {
         "text": "The elephants are not impressed by your simulation.\nThey demand to know how tall the tower will be after 1000000000000 rocks have stopped! Only then will they feel confident enough to proceed through the cave.\n\nIn the example above, the tower would be 1514285714288 units tall!\n\nHow tall will the tower be after 1000000000000 rocks have stopped?",
@@ -18,6 +18,6 @@
         "test_answer": 1514285714288,
         "test_answer_idx": -2,
         "answer": "1565242165201",
-        "time": 1.5319559001363814
+        "time": 1.4098969000042416
     }
 }

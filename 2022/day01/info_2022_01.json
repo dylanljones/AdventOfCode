@@ -10,7 +10,7 @@
         "test_answer": 24000,
         "test_answer_idx": -1,
         "answer": "69626",
-        "time": 0.0005027996376156807
+        "time": 0.0005071000196039677
     },
     "part_2": {
         "text": "By the time you calculate the answer to the Elves' question, they've already realized that the Elf carrying the most Calories of food might eventually run out of snacks.\n\nTo avoid this unacceptable situation, the Elves would instead like to know the total Calories carried by the top three Elves carrying the most Calories.\nThat way, even if one of those Elves runs out of snacks, they still have two backups.\n\nIn the example above, the top three Elves are the fourth Elf (with 24000 Calories), then the third Elf (with 11000 Calories), then the fifth Elf (with 10000 Calories).\nThe sum of the Calories carried by these three elves is 45000.\n\nFind the top three Elves carrying the most Calories.\nHow many Calories are those Elves carrying in total?",
@@ -18,6 +18,6 @@
         "test_answer": 45000,
         "test_answer_idx": -1,
         "answer": "206780",
-        "time": 0.0006056004203855991
+        "time": 0.0005303000216372311
     }
 }

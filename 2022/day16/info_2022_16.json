@@ -10,7 +10,7 @@
         "test_answer": 1651,
         "test_answer_idx": -1,
         "answer": "1617",
-        "time": 1.0336656998842955
+        "time": 0.9776099000009708
     },
     "part_2": {
         "text": "You're worried that even with an optimal approach, the pressure released won't be enough.\nWhat if you got one of the elephants to help you?\n\nIt would take you 4 minutes to teach an elephant how to open the right valves in the right order, leaving you with only 26 minutes to actually execute your plan.\nWould having two of you working together be better, even if it means having less time? (Assume that you teach the elephant before opening any valves yourself, giving you both the same full 26 minutes.)\n\nIn the example above, you could teach the elephant to help you as follows:\n\n== Minute 1 ==\nNo valves are open.\nYou move to valve II.\nThe elephant moves to valve DD.\n\n== Minute 2 ==\nNo valves are open.\nYou move to valve JJ.\nThe elephant opens valve DD.\n\n== Minute 3 ==\nValve DD is open, releasing 20 pressure.\nYou open valve JJ.\nThe elephant moves to valve EE.\n\n== Minute 4 ==\nValves DD and JJ are open, releasing 41 pressure.\nYou move to valve II.\nThe elephant moves to valve FF.\n\n== Minute 5 ==\nValves DD and JJ are open, releasing 41 pressure.\nYou move to valve AA.\nThe elephant moves to valve GG.\n\n== Minute 6 ==\nValves DD and JJ are open, releasing 41 pressure.\nYou move to valve BB.\nThe elephant moves to valve HH.\n\n== Minute 7 ==\nValves DD and JJ are open, releasing 41 pressure.\nYou open valve BB.\nThe elephant opens valve HH.\n\n== Minute 8 ==\nValves BB, DD, HH, and JJ are open, releasing 76 pressure.\nYou move to valve CC.\nThe elephant moves to valve GG.\n\n== Minute 9 ==\nValves BB, DD, HH, and JJ are open, releasing 76 pressure.\nYou open valve CC.\nThe elephant moves to valve FF.\n\n== Minute 10 ==\nValves BB, CC, DD, HH, and JJ are open, releasing 78 pressure.\nThe elephant moves to valve EE.\n\n== Minute 11 ==\nValves BB, CC, DD, HH, and JJ are open, releasing 78 pressure.\nThe elephant opens valve EE.\n\n(At this point, all valves are open.)\n\n== Minute 12 ==\nValves BB, CC, DD, EE, HH, and JJ are open, releasing 81 pressure.\n\n...\n\n== Minute 20 ==\nValves BB, CC, DD, EE, HH, and JJ are open, releasing 81 pressure.\n\n...\n\n== Minute 26 ==\nValves BB, CC, DD, EE, HH, and JJ are open, releasing 81 pressure.\n\nWith the elephant helping, after 26 minutes, the best you could do would release a total of 1707 pressure.\n\nWith you and an elephant working together for 26 minutes, what is the most pressure you could release?",
@@ -18,6 +18,6 @@
         "test_answer": 1707,
         "test_answer_idx": -1,
         "answer": "2171",
-        "time": 5.746564500033855
+        "time": 4.878020900010597
     }
 }
