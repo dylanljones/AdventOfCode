@@ -53,7 +53,6 @@ class Solution(aoc.Puzzle):
         velocities = 0
         for vx in range(xlim[1] + 1):
             for vy in range(-y_max, y_max + 1):
-                print(vx, vy)
                 velocities += hits_target(target, (vx, vy))
         return velocities
 
